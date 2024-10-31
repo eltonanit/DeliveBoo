@@ -13,17 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-      Schema::create('restaurants', function (Blueprint $table) {
-    $table->id();
-    $table->string('name', 120);
-    $table->string('slug');
-    $table->string('address', 120);
-    $table->string('phone', 120);
-    $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-    $table->timestamps();
-    
-});
-
+        Schema::create('restaurants', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 120);
+            $table->string('slug');
+            $table->string('address', 120);
+            $table->string('phone', 120);
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->timestamps();
+        });
     }
 
     /**
