@@ -17,18 +17,15 @@ class RestaurantSeeder extends Seeder
     public function run()
     {
         $restaurants = config('db_deliveboo.restaurants');
-        foreach ( $restaurants as $restaurant ){
+        foreach ($restaurants as $restaurant) {
             $new_restaurant = new Restaurant();
-            $new_restaurant -> name = $restaurant['name'];
-            $new_restaurant -> slug = Str::slug($restaurant['name'], '-');
-            $new_restaurant -> address = $restaurant['address'];
-             $new_restaurant -> phone = $restaurant['phone'];
-            $new_restaurant -> user_id = $restaurant['user_id'];
-            
-            $new_restaurant -> save();
+            $new_restaurant->name = $restaurant['name'];
+            $new_restaurant->slug = Str::slug($restaurant['name'], '-');
+            $new_restaurant->address = $restaurant['address'];
+            $new_restaurant->phone = $restaurant['phone'];
+            // $new_restaurant->user_id = $restaurant['user_id'];
 
-
-            
+            $new_restaurant->save();
         }
     }
 }
