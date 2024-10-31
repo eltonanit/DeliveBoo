@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="it">
 <head>
