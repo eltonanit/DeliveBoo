@@ -30,6 +30,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function () {
+    Route::get('/', [RestaurantController::class, 'index'])->name('dashboard');
+    Route::resource('restaurants', RestaurantController::class);
+});
+
 Route::resource('restaurants', RestaurantController::class);
 Route::resource('dishes', DishController::class);
 
