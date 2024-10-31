@@ -6,25 +6,21 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreDishRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string|max:120',
+            'course' => 'required|in:Appetizer,First,Second,Side,Dessert',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric|between:0,999.99',
+            'vegetarian' => 'required|boolean',
+            'visible' => 'required|boolean',
+            'restaurant_id' => 'required|exists:restaurants,id',
         ];
     }
 }
