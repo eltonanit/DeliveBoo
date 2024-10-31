@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Restaurant;
 use App\Http\Requests\StoreRestaurantRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
+use Illuminate\Support\Str;
 
 class RestaurantController extends Controller
 {
@@ -15,8 +16,10 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        //
+        $restaurants = Restaurant::all();
+        return view('restaurants.index', compact('restaurants'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -25,8 +28,9 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        //
+        return view('restaurants.create');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -36,8 +40,17 @@ class RestaurantController extends Controller
      */
     public function store(StoreRestaurantRequest $request)
     {
-        //
+        $restaurant = new Restaurant();
+        $restaurant->name = $request->name;
+        $restaurant->slug = Str::slug($request->name);
+        $restaurant->address = $request->address;
+        $restaurant->phone = $request->phone;
+        $restaurant->save();
+
+        return redirect()->route('restaurants.index')->with('success', 'Ristorante creato con successo');
     }
+
+
 
     /**
      * Display the specified resource.
@@ -47,8 +60,9 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        //
+        return view('restaurants.show', compact('restaurant'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -58,8 +72,9 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        //
+        return view('restaurants.edit', compact('restaurant'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -70,8 +85,15 @@ class RestaurantController extends Controller
      */
     public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
-        //
+        $restaurant->name = $request->name;
+        $restaurant->slug = Str::slug($request->name);
+        $restaurant->address = $request->address;
+        $restaurant->phone = $request->phone;
+        $restaurant->save();
+
+        return redirect()->route('restaurants.index')->with('success', 'Ristorante aggiornato con successo');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -81,6 +103,7 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
-        //
+        $restaurant->delete();
+        return redirect()->route('restaurants.index')->with('success', 'Ristorante eliminato con successo');
     }
 }
