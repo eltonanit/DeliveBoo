@@ -1,0 +1,21 @@
+.box_image {
+    width: 100%;
+    height: 100%;
+
+    img {
+        width: 100%;
+        border-radius: 5px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .w-lg-75 {
+        width: 75%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .card {
+        min-width: 540px;
+    }
+}
