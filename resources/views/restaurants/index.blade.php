@@ -13,8 +13,9 @@
     <body>
 
         {{-- Struttura Tabellare --}}
-        <div class="container py-5">
-            <h1 class="pb-4 ps-3">Il Tuo/I Tuoi Ristorante/i</h1> <!-- da gestire il numero di ristoranti di un singolo proprietario e di conseguenza la scritta -->
+        {{-- <div class="container py-5">
+            <h1 class="pb-4 ps-3">Il Tuo/I Tuoi Ristorante/i</h1>
+            <!-- da gestire il numero di ristoranti di un singolo proprietario e di conseguenza la scritta -->
             <div class="row">
                 <div class="col-12 d-flex justify-content-center">
 
@@ -26,7 +27,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nome</th>
-                                    <th scope="col" class="text-sm-end">Azioni</th>
+                                    <th scope="col" class="text-sm-end pe-4">Azioni</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,17 +46,23 @@
                                                     <!-- Dropdown menu links -->
                                                     <li>
                                                         <div class="d-flex justify-content-between">
-                                                            <span>Visualizza</span><button type="button" class="btn btn-sm btn-primary"><i class="bi bi-eye-fill"></i></i></button>
+                                                            <span>Visualizza</span><button type="button"
+                                                                class="btn btn-sm btn-primary"><i
+                                                                    class="bi bi-eye-fill"></i></i></button>
                                                         </div>
                                                     </li>
                                                     <li class="my-2">
                                                         <div class="d-flex justify-content-between">
-                                                            <span>Modifica</span><button type="button" class="btn btn-sm btn-warning mx-lg-1"><i class="bi bi-pencil-square"></i></button>
+                                                            <span>Modifica</span><button type="button"
+                                                                class="btn btn-sm btn-warning mx-lg-1"><i
+                                                                    class="bi bi-pencil-square"></i></button>
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div class="d-flex justify-content-between">
-                                                            <span>Elimina</span><button type="button" class="btn btn-sm btn-danger"><i class="bi bi-trash3"></i></button>
+                                                            <span>Elimina</span><button type="button"
+                                                                class="btn btn-sm btn-danger"><i
+                                                                    class="bi bi-trash3"></i></button>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -63,9 +70,14 @@
 
                                             <!-- tablet/desktop actions -->
                                             <div class="d-none d-sm-block text-end">
-                                                <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-eye-fill"></i></i></button>
-                                                <button type="button" class="btn btn-sm btn-warning mx-lg-1"><i class="bi bi-pencil-square"></i></button>
-                                                <button type="button" class="btn btn-sm btn-danger"><i class="bi bi-trash3"></i></button>
+                                                <a href="{{ route('restaurants.show', ['restaurant' => $restaurant->id]) }}"
+                                                    class="btn btn-outline-primary btn-sm">
+                                                    <i class="bi bi-eye-fill fs-4"></i>
+                                                </a>
+                                                <button type="button" class="btn btn-sm btn-warning mx-lg-1"><i
+                                                        class="bi bi-pencil-square"></i></button>
+                                                <button type="button" class="btn btn-sm btn-danger"><i
+                                                        class="bi bi-trash3"></i></button>
                                             </div>
                                         </td>
                                     </tr>
@@ -75,11 +87,12 @@
                     @endif
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         {{-- Struttura Cards --}}
-        {{-- <div class="container py-5">
-            <h1 class="pb-3">Il Tuo/I Tuoi Ristorante/i</h1> <!-- da gestire il numero di ristoranti di un singolo proprietario e di conseguenza la scritta -->
+        <div class="container py-5">
+            <h1 class="pb-3 text-center">Il Tuo/I Tuoi Ristorante/i</h1>
+            <!-- da gestire il numero di ristoranti di un singolo proprietario e di conseguenza la scritta -->
             <div class="row p-3">
                 @foreach ($restaurants as $restaurant)
                     <div class="col-12 col-sm-6 col-md-6 d-flex justify-content-center py-2">
@@ -96,17 +109,23 @@
 
                                         <!-- mobile btns -->
                                         <div class="d-md-none float-end">
-                                            <button type="button" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></button>
-                                            <button type="button" class="btn btn-sm btn-danger"><i class="bi bi-trash3"></i></button>
+                                            <button type="button" class="btn btn-sm btn-warning"><i
+                                                    class="bi bi-pencil-square"></i></button>
+                                            <button type="button" class="btn btn-sm btn-danger"><i
+                                                    class="bi bi-trash3"></i></button>
                                         </div>
 
                                         <!-- desktop btns -->
                                         <div class="d-none d-md-block float-end pt-3">
+                                            <a href="{{ route('restaurants.show', ['restaurant' => $restaurant->id]) }}"
+                                                class="btn btn-sm btn-primary ">
+                                                Show
+                                            </a>
                                             <button type="button" class="btn btn-sm btn-warning">Edit</button>
                                             <button type="button" class="btn btn-sm btn-danger">Delete</button>
                                         </div>
 
-                                        <!-- <p class="card-text"> {{ $restaurant->address}}{{ $restaurant->phone}} </p> -->
+                                        <!-- <p class="card-text"> {{ $restaurant->address }}{{ $restaurant->phone }} </p> -->
                                     </div>
                                 </div>
                             </div>
@@ -114,7 +133,7 @@
                     </div>
                 @endforeach
             </div>
-        </div> --}}
+        </div>
     </body>
 
     </html>
