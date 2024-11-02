@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RestaurantController;
-use App\Http\Controllers\DishController;
+use App\Http\Controllers\Admin\RestaurantController as RestaurantController;
+use App\Http\Controllers\Admin\DishController;
 use Illuminate\Support\Facades\Route;
 
 /*

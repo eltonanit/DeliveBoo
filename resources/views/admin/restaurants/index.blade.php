@@ -117,11 +117,14 @@
 
                                         <!-- desktop btns -->
                                         <div class="d-none d-md-block float-end pt-3">
-                                            <a href="{{ route('restaurants.show', ['restaurant' => $restaurant->id]) }}"
+                                            <a href="{{ route('admin.restaurants.show', ['restaurant' => $restaurant->id]) }}"
                                                 class="btn btn-sm btn-primary ">
                                                 Show
                                             </a>
-                                            <button type="button" class="btn btn-sm btn-warning">Edit</button>
+                                            <a href="{{ route('admin.restaurants.edit', ['restaurant' => $restaurant->id]) }}"
+                                                class="btn btn-sm btn-warning ">
+                                                Edit
+                                            </a>
                                             <button type="button" class="btn btn-sm btn-danger">Delete</button>
                                         </div>
 
