@@ -7,6 +7,7 @@ use App\Models\Restaurant;
 use App\Http\Requests\StoreDishRequest;
 use App\Http\Requests\UpdateDishRequest;
 use Illuminate\Support\Str;
+use App\Http\Controllers\Controller;
 
 class DishController extends Controller
 {
@@ -116,5 +117,4 @@ class DishController extends Controller
         $dish->delete();
         return redirect()->route('dishes.index')->with('success', 'Piatto eliminato con successo');
     }
-
 }

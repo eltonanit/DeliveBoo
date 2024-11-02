@@ -6,6 +6,8 @@ use App\Models\Restaurant;
 use App\Http\Requests\StoreRestaurantRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
 use Illuminate\Support\Str;
+use App\Http\Controllers\Controller;
+
 
 class RestaurantController extends Controller
 {
