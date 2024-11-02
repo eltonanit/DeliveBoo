@@ -1,54 +1,63 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container py-5 container-show">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10">
-                <div class="card shadow-lg border-0 rounded-3">
-                    <div class="card-body p-5">
-                        <!-- Titolo -->
-                        <h2 class="display-6 text-center mb-4 text-uppercase fw-bold">Dettagli Ristorante</h2>
-
-                        <!-- Tabella dettagli ristorante -->
-                        <table class="table table-bordered table-hover shadow-sm rounded">
-                            <tbody>
-                                <tr>
-                                    <th class="bg-light text-end w-50">Nome Ristorante:</th>
-                                    <td class="fw-bold">{{ $restaurant->name }}</td>
-                                </tr>
-                                <tr>
-                                    <th class="bg-light text-end">Indirizzo Ristorante:</th>
-                                    <td>{{ $restaurant->address }}</td>
-                                </tr>
-                                <tr>
-                                    <th class="bg-light text-end">Telefono Ristorante:</th>
-                                    <td>{{ $restaurant->phone }}</td>
-                                </tr>
-                                {{-- <tr>
-                                    <th class="bg-light text-end">Immagine relativa al progetto:</th>
-                                    @if (Str::startsWith($restaurant->image_restaurant, 'https'))
-                                        <td>
-                                            <img src="{{ $restaurant->image_restaurant }}" alt="{{ $restaurant->name }}">
-                                        </td>
-                                    @else
-                                        <td>
-                                            <img src="{{ asset('storage/' . $restaurant->image_restaurant) }}"
-                                                alt="{{ $restaurant->name }}" class="img-thumbnail">
-                                        </td>
-                                    @endif
-                                </tr> --}}
-                            </tbody>
-                        </table>
-
-                        <!-- Pulsante di ritorno -->
-                        <div class="text-center mt-5">
-                            <a href="{{ route('restaurants.index') }}"
-                                class="btn btn-primary btn-lg rounded-pill px-4 shadow">
-                                <i class="bi bi-arrow-left me-2"></i> Torna alla lista
-                            </a>
+    <div class="container p-3">
+        <div class="row">
+            <div class="col-12">
+                <h1>Modifica Ristorante</h1>
+            </div>
+            <div class="col-12">
+                {{-- @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="list-unstyled">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif --}}
+                <form action="{{ route('admin.restaurants.update', ['restaurant' => $restaurant->id]) }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <label class="label-form">Nome Ristorante</label>
+                            <input type="text" name="name" id="" class="form-control form-control-sm" placeholder="Nome Ristorante" value="{{ old('name', $restaurant->name) }}">
+                            {{-- @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror --}}
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label class="label-form">Indirizzo Ristorante</label>
+                            <input type="text" name="address" id="" class="form-control form-control-sm" placeholder="Indirizzo Ristorante" value="{{ old('address', $restaurant->address) }}">
+                            {{-- @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror --}}
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label class="label-form">Numero Ristorante</label>
+                            <input type="tel" name="phone" id="" class="form-control form-control-sm" placeholder="Numero Ristorante" value="{{ old('phone', $restaurant->phone) }}">
+                            {{-- @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror --}}
+                        </div>
+                        <div class="col-12 mt-3 mb-3">
+                            @if($restaurant->image != null)
+                                <img class="restaurant-image" src="{{ asset('./storage/'.$restaurant->image) }}" alt="{{ $restaurant->name }}">
+                            @else
+                                <img class="restaurant-image" src="{{ asset('img/test-ristorante.jpg') }}" alt="{{ $restaurant->name }}">
+                            @endif
+                        </div>
+                        <div class="col-12 mt-3 mb-3">
+                            <label for="" class="control-label">Immagine Ristorante</label>
+                            <input type="file" name="image" id="image" class="form-control form-control-sm">
+                        </div>
+                        <div class="col-12 mt-3 text-center">
+                            <button type="submit" class="btn btn-success">Salva</button>
                         </div>
                     </div>
-                </div>
+                
+                </form>
             </div>
         </div>
     </div>
