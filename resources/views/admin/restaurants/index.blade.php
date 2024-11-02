@@ -96,7 +96,7 @@
             <div class="row p-3">
                 @foreach ($restaurants as $restaurant)
                     <div class="col-12 col-sm-6 col-md-6 d-flex justify-content-center py-2">
-                        <div class="card d-flex justify-content-center align-items-center p-3" style="max-width: 500px;">
+                        <div class="card shadow-sm d-flex justify-content-center align-items-center p-3" style="max-width: 500px;">
                             <div class="row align-items-center g-0">
                                 <div class="col-md-4">
                                     <div class="box_image">
