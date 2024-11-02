@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Restaurant;
 use App\Http\Requests\StoreRestaurantRequest;
@@ -17,7 +17,7 @@ class RestaurantController extends Controller
     public function index()
     {
         $restaurants = Restaurant::all();
-        return view('restaurants.index', compact('restaurants'));
+        return view('admin.restaurants.index', compact('restaurants'));
     }
 
 
@@ -28,7 +28,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        return view('restaurants.create');
+        return view('admin.restaurants.create');
     }
 
 
@@ -47,7 +47,7 @@ class RestaurantController extends Controller
         $restaurant->phone = $request->phone;
         $restaurant->save();
 
-        return redirect()->route('restaurants.index')->with('success', 'Ristorante creato con successo');
+        return redirect()->route('admin.restaurants.index')->with('success', 'Ristorante creato con successo');
     }
 
 
@@ -60,7 +60,7 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        return view('restaurants.show', compact('restaurant'));
+        return view('admin.restaurants.show', compact('restaurant'));
     }
 
 
@@ -72,7 +72,7 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        return view('restaurants.edit', compact('restaurant'));
+        return view('admin.restaurants.edit', compact('restaurant'));
     }
 
 
@@ -91,7 +91,7 @@ class RestaurantController extends Controller
         $restaurant->phone = $request->phone;
         $restaurant->save();
 
-        return redirect()->route('restaurants.index')->with('success', 'Ristorante aggiornato con successo');
+        return redirect()->route('admin.restaurants.index')->with('success', 'Ristorante aggiornato con successo');
     }
 
 
@@ -104,6 +104,6 @@ class RestaurantController extends Controller
     public function destroy(Restaurant $restaurant)
     {
         $restaurant->delete();
-        return redirect()->route('restaurants.index')->with('success', 'Ristorante eliminato con successo');
+        return redirect()->route('admin.restaurants.index')->with('success', 'Ristorante eliminato con successo');
     }
 }
