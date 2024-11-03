@@ -42,12 +42,26 @@ class RestaurantController extends Controller
      */
     public function store(StoreRestaurantRequest $request)
     {
+        $form_data = $request->all();
+
+        $form_data['slug'] = Restaurant::generateSlug($form_data['name']);
+
         $restaurant = new Restaurant();
         $restaurant->name = $request->name;
         $restaurant->slug = Str::slug($request->name);
         $restaurant->address = $request->address;
         $restaurant->phone = $request->phone;
+
+        $restaurant->fill($form_data);
         $restaurant->save();
+
+        // $validated_data = $request->validated();
+
+        // $validated_data['slug'] = Restaurant::generateSlug($validated_data['name']);
+
+        // $restaurant = Restaurant::create($validated_data);
+
+
 
         return redirect()->route('admin.restaurants.index')->with('success', 'Ristorante creato con successo');
     }
