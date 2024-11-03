@@ -91,12 +91,23 @@
 
         {{-- Struttura Cards --}}
         <div class="container py-5">
-            <h1 class="pb-3 text-center">Il Tuo/I Tuoi Ristorante/i</h1>
+
+            <div class="d-flex justify-content-between">
+                <h1 class="pb-3 text-center">Il Tuo/I Tuoi Ristorante/i</h1>
+
+                <div class="text-center">
+                    <a href="{{ route('admin.restaurants.create') }}" class="btn btn-primary btn-lg">
+                        <i class="bi bi-plus-square me-2"></i> Aggiungi nuovo ristorante
+                    </a>
+                </div>
+            </div>
+
             <!-- da gestire il numero di ristoranti di un singolo proprietario e di conseguenza la scritta -->
             <div class="row p-3">
                 @foreach ($restaurants as $restaurant)
                     <div class="col-12 col-sm-6 col-md-6 d-flex justify-content-center py-2">
-                        <div class="card shadow-sm d-flex justify-content-center align-items-center p-3" style="max-width: 500px;">
+                        <div class="card shadow-sm d-flex justify-content-center align-items-center p-3"
+                            style="max-width: 500px;">
                             <div class="row align-items-center g-0">
                                 <div class="col-md-4">
                                     <div class="box_image">
@@ -125,10 +136,18 @@
                                                 class="btn btn-sm btn-warning ">
                                                 Edit
                                             </a>
-                                            <button type="button" class="btn btn-sm btn-danger">Delete</button>
+
+                                            <form
+                                                action="{{ route('admin.restaurants.destroy', ['restaurant' => $restaurant->id]) }}"
+                                                method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                            </form>
                                         </div>
 
-                                        <!-- <p class="card-text"> {{ $restaurant->address }}{{ $restaurant->phone }} </p> -->
+                                        <p class="card-text"> {{ $restaurant->address }}{{ $restaurant->phone }} </p>
                                     </div>
                                 </div>
                             </div>
