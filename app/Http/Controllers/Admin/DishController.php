@@ -100,7 +100,8 @@ class DishController extends Controller
         $dish->vegetarian = $request->vegetarian;
         $dish->visible = $request->visible;
         $dish->restaurant_id = $request->restaurant_id;
-        $dish->save();
+
+        $dish->update();
 
         return redirect()->route('admin.dishes.index')->with('success', 'Piatto aggiornato con successo');
     }
