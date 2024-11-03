@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Restaurant;
+use App\Models\Dish;
 use App\Http\Requests\StoreRestaurantRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
 use Illuminate\Support\Str;
@@ -76,8 +77,12 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        return view('admin.restaurants.show', compact('restaurant'));
+        // Recupera solo i piatti associati al ristorante
+        $dishes = $restaurant->dishes;
+
+        return view('admin.restaurants.show', compact('restaurant', 'dishes'));
     }
+
 
 
     /**
@@ -88,7 +93,8 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        return view('admin.restaurants.edit', compact('restaurant'));
+        $dishes = Dish::all();
+        return view('admin.restaurants.edit', compact('restaurant', 'dishes'));
     }
 
 

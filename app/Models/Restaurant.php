@@ -17,4 +17,9 @@ class Restaurant extends Model
     {
         return Str::slug($name, '-');
     }
+
+    public function dishes()
+    {
+        return $this->hasMany(Dish::class);
+    }
 }

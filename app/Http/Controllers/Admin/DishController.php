@@ -19,7 +19,7 @@ class DishController extends Controller
     public function index()
     {
         $dishes = Dish::all();
-        return view('dishes.index', compact('dishes'));
+        return view('admin.dishes.index', compact('dishes'));
     }
 
 
@@ -31,7 +31,7 @@ class DishController extends Controller
     public function create()
     {
         $restaurants = Restaurant::all();
-        return view('dishes.create', compact('restaurants'));
+        return view('admin.dishes.create', compact('restaurants'));
     }
 
 
@@ -54,7 +54,7 @@ class DishController extends Controller
         $dish->restaurant_id = $request->restaurant_id;
         $dish->save();
 
-        return redirect()->route('dishes.index')->with('success', 'Piatto creato con successo');
+        return redirect()->route('admin.dishes.index')->with('success', 'Piatto creato con successo');
     }
 
 
@@ -66,7 +66,7 @@ class DishController extends Controller
      */
     public function show(Dish $dish)
     {
-        return view('dishes.show', compact('dish'));
+        return view('admin.dishes.show', compact('dish'));
     }
 
 
@@ -79,7 +79,7 @@ class DishController extends Controller
     public function edit(Dish $dish)
     {
         $restaurants = Restaurant::all();
-        return view('dishes.edit', compact('dish', 'restaurants'));
+        return view('admin.dishes.edit', compact('dish', 'restaurants'));
     }
 
 
@@ -102,7 +102,7 @@ class DishController extends Controller
         $dish->restaurant_id = $request->restaurant_id;
         $dish->save();
 
-        return redirect()->route('dishes.index')->with('success', 'Piatto aggiornato con successo');
+        return redirect()->route('admin.dishes.index')->with('success', 'Piatto aggiornato con successo');
     }
 
 
@@ -115,6 +115,6 @@ class DishController extends Controller
     public function destroy(Dish $dish)
     {
         $dish->delete();
-        return redirect()->route('dishes.index')->with('success', 'Piatto eliminato con successo');
+        return redirect()->route('admin.dishes.index')->with('success', 'Piatto eliminato con successo');
     }
 }

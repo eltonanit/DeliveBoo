@@ -33,9 +33,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', [RestaurantController::class, 'index'])->name('dashboard');
     Route::resource('restaurants', RestaurantController::class);
+    Route::resource('dishes', DishController::class);
 });
 
 Route::resource('restaurants', RestaurantController::class);
 Route::resource('dishes', DishController::class);
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
