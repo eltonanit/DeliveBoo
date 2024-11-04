@@ -6,7 +6,7 @@
             <div class="col-12">
                 <div class="card shadow-sm border-0">
                     <div class="card-header bg-primary text-white">
-                        <h3 class="mb-0 text-center">Aggiungi nuovo ristorante</h3>
+                        <h3 class="mb-0 text-center">Aggiungio nuovo ristorante</h3>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('admin.restaurants.store') }}" method="POST" enctype="multipart/form-data">

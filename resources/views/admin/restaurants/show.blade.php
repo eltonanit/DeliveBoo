@@ -8,8 +8,15 @@
                 <div class="card shadow-lg border-0 rounded-3">
                     <div class="card-body borad-menu p-5">
                         <!-- Titolo -->
-                        <h2 class="display-6 text-center mb-4 text-uppercase text-white fw-bold">{{ $restaurant->name }}</h2>
-
+                          <div class="container py-5">
+                            <div class="d-flex justify-content-between">
+                                <h2 class="display-6 text-center mb-4 text-uppercase text-white fw-bold">{{ $restaurant->name }}</h2>
+                                <div class="text-center">
+                                    <a href="{{ route('admin.dishes.create') }}" class="btn btn-primary btn-lg">
+                                        <i class="bi bi-plus-square me-2"></i> Aggiungi nuovo piatto
+                                    </a>
+                                </div>
+                            </div>
                         <!-- Tabella dettagli ristorante -->
                         <table class="table border-white border-top table-dark">
                             <thead class="table-dark">
