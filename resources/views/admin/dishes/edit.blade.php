@@ -66,6 +66,19 @@
                             @enderror --}}
                         </div>
 
+                        <!-- Id ristorante (momentaneo) -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <input
+                                    class="form-control form-control-lg @error('restaurant_id') is-invalid @enderror"
+                                    type="hidden" name="restaurant_id" id="restaurant_id"
+                                    value="{{ old('restaurant_id', $dish->restaurant_id) }}" placeholder="Inserisci il prezzo">
+                                {{-- @error('restaurant_id')
+                                        <div class="text-danger"> {{ $message }} </div>
+                                    @enderror --}}
+                            </div>
+                        </div>
+
                         <div class="col-12 mb-3">
                             <div class="mb-3">
                                 <label class="form-label">Visibile</label>

@@ -33,12 +33,13 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', [RestaurantController::class, 'index'])->name('dashboard');
     Route::resource('restaurants', RestaurantController::class);
+    Route::get('/restaurants/{restaurant}/dishes/create', [DishController::class, 'create'])->name('dishes.create');
     Route::resource('dishes', DishController::class);
 });
 
-Route::post('/restaurants/{restaurant}/dishes', [DishController::class, 'store'])->name('admin.restaurants.dishes.store');
+// Route::post('/restaurants/{restaurant}/dishes', [DishController::class, 'store'])->name('admin.restaurants.dishes.store');
 
-Route::resource('restaurants', RestaurantController::class);
-Route::resource('dishes', DishController::class);
+// Route::resource('restaurants', RestaurantController::class);
+// Route::resource('dishes', DishController::class);
 
 require __DIR__ . '/auth.php';

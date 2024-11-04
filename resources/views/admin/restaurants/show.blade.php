@@ -12,7 +12,8 @@
                             <div class="d-flex justify-content-between">
                                 <h2 class="display-6 text-center mb-4 text-uppercase text-white fw-bold">{{ $restaurant->name }}</h2>
                                 <div class="text-center">
-                                    <a href="{{ route('admin.dishes.create') }}" class="btn btn-primary btn-lg">
+                                    {{-- {{ dd($restaurant->id) }} --}}
+                                    <a href="{{ route('admin.dishes.create', ['restaurant' => $restaurant->id]) }}" class="btn btn-primary btn-lg">
                                         <i class="bi bi-plus-square me-2"></i> Aggiungi nuovo piatto
                                     </a>
                                 </div>
@@ -68,7 +69,7 @@
 
                         <!-- Pulsante di ritorno -->
                         <div class="text-center mt-5">
-                            <a href="{{ route('restaurants.index') }}"
+                            <a href="{{ route('admin.restaurants.index') }}"
                                 class="btn btn-primary btn-sm rounded-pill px-4 shadow">
                                 <i class="bi bi-arrow-left me-2"></i> Torna alla lista
                             </a>
