@@ -75,15 +75,14 @@
                                     </div>
                                 </div>
 
+                                <!-- Id ristorante (momentaneo) -->
                                 <div class="col-md-6">
                                     <div class="mb-4">
-                                        <label class="form-label" for="restaurant_id"><i
-                                                class="bi bi-currency-euro me-2"></i>
-                                            id</label>
+                                        <label class="form-label" for="restaurant_id">ID</label>
                                         <input
                                             class="form-control form-control-lg @error('restaurant_id') is-invalid @enderror"
                                             type="text" name="restaurant_id" id="restaurant_id"
-                                            value="{{ old('restaurant_id') }}" placeholder="Inserisci il prezzo">
+                                            value="{{ old('restaurant_id') }}" placeholder="ID">
                                         {{-- @error('restaurant_id')
                                                 <div class="text-danger"> {{ $message }} </div>
                                             @enderror --}}
