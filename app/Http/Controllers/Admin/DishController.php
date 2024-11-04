@@ -43,18 +43,14 @@ class DishController extends Controller
      */
     public function store(StoreDishRequest $request)
     {
+        $form_data = $request->all();
+        $form_data['slug'] = Dish::generateSlug($form_data['name']);
+
         $dish = new Dish();
-        $dish->name = $request->name;
-        $dish->slug = Str::slug($request->name);
-        $dish->course = $request->course;
-        $dish->description = $request->description;
-        $dish->price = $request->price;
-        $dish->vegetarian = $request->vegetarian;
-        $dish->visible = $request->visible;
-        $dish->restaurant_id = $request->restaurant_id;
+        $dish->fill($form_data);
         $dish->save();
 
-        return redirect()->route('admin.dishes.index')->with('success', 'Piatto creato con successo');
+        return redirect()->route('admin.restaurants.index', $dish)->with('success', 'Piatto creato con successo');
     }
 
 
@@ -101,9 +97,9 @@ class DishController extends Controller
         $dish->visible = $request->visible;
         $dish->restaurant_id = $request->restaurant_id;
 
-        $dish->update();
+        $dish->save();
 
-        return redirect()->route('admin.dishes.index')->with('success', 'Piatto aggiornato con successo');
+        return redirect()->route('admin.restaurants.index')->with('success', 'Piatto aggiornato con successo');
     }
 
 

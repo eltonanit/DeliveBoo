@@ -36,6 +36,8 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::resource('dishes', DishController::class);
 });
 
+Route::post('/restaurants/{restaurant}/dishes', [DishController::class, 'store'])->name('admin.restaurants.dishes.store');
+
 Route::resource('restaurants', RestaurantController::class);
 Route::resource('dishes', DishController::class);
 
