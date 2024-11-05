@@ -20,7 +20,7 @@ class UpdateDishRequest extends FormRequest
             'price' => 'required|numeric|between:0,999.99',
             'vegetarian' => 'required|boolean',
             'visible' => 'required|boolean',
-            'restaurant_id' => 'required|exists:restaurants,id',
+            'restaurant_id' => 'required|numeric|exists:restaurants,id',
         ];
     }
 }

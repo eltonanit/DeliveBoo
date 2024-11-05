@@ -4,7 +4,7 @@
     <div class="container p-3">
         <div class="row">
             <div class="col-12">
-                <h1>Modifica Ristorante</h1>
+                <h1>Modifica Piatto</h1>
             </div>
             <div class="col-12">
                 {{-- @if ($errors->any())
@@ -30,22 +30,18 @@
                             @enderror --}}
                         </div>
                         <div class="col-12 mb-3">
-                            <label class="label-form">Ingredienti Piatto</label>
-                            <input type="text" name="address" id="" class="form-control form-control-sm"
-                                placeholder="Ingredienti Piatto" value="{{ old('address', $dish->address) }}">
-                            {{-- @error('name')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror --}}
-                        </div>
-                        <div class="col-12 mb-3">
                             <div class="mb-3">
                                 <label for="course" class="form-label">Portata</label>
                                 <select name="course" id="course" class="form-select" required>
-                                    <option value="Appetizer" {{ $dish->course === 'Appetizer' ? 'selected' : '' }}>Antipasto</option>
+                                    <option value="Appetizer" {{ $dish->course === 'Appetizer' ? 'selected' : '' }}>
+                                        Antipasto</option>
                                     <option value="First" {{ $dish->course === 'First' ? 'selected' : '' }}>Primo</option>
-                                    <option value="Second" {{ $dish->course === 'Second' ? 'selected' : '' }}>Secondo</option>
-                                    <option value="Side" {{ $dish->course === 'Side' ? 'selected' : '' }}>Contorno</option>
-                                    <option value="Dessert" {{ $dish->course === 'Dessert' ? 'selected' : '' }}>Dessert</option>
+                                    <option value="Second" {{ $dish->course === 'Second' ? 'selected' : '' }}>Secondo
+                                    </option>
+                                    <option value="Side" {{ $dish->course === 'Side' ? 'selected' : '' }}>Contorno
+                                    </option>
+                                    <option value="Dessert" {{ $dish->course === 'Dessert' ? 'selected' : '' }}>Dessert
+                                    </option>
                                 </select>
                             </div>
                             {{-- @error('name')
@@ -70,16 +66,31 @@
                             @enderror --}}
                         </div>
 
+                        <!-- Id ristorante (momentaneo) -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <input
+                                    class="form-control form-control-lg @error('restaurant_id') is-invalid @enderror"
+                                    type="hidden" name="restaurant_id" id="restaurant_id"
+                                    value="{{ old('restaurant_id', $dish->restaurant_id) }}" placeholder="Inserisci il prezzo">
+                                {{-- @error('restaurant_id')
+                                        <div class="text-danger"> {{ $message }} </div>
+                                    @enderror --}}
+                            </div>
+                        </div>
+
                         <div class="col-12 mb-3">
                             <div class="mb-3">
                                 <label class="form-label">Visibile</label>
                                 <div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="visible" id="visible_yes" value="1" {{ $dish->visible ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="radio" name="visible" id="visible_yes"
+                                            value="1" {{ $dish->visible ? 'checked' : '' }}>
                                         <label class="form-check-label" for="visible_yes">Sì</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="visible" id="visible_no" value="0" {{ !$dish->visible ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="radio" name="visible" id="visible_no"
+                                            value="0" {{ !$dish->visible ? 'checked' : '' }}>
                                         <label class="form-check-label" for="visible_no">No</label>
                                     </div>
                                 </div>
@@ -94,11 +105,13 @@
                                 <label class="form-label">Vegetariano</label>
                                 <div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="vegetarian" id="vegetarian_yes" value="1" {{ $dish->vegetarian ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="radio" name="vegetarian" id="vegetarian_yes"
+                                            value="1" {{ $dish->vegetarian ? 'checked' : '' }}>
                                         <label class="form-check-label" for="vegetarian_yes">Sì</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="vegetarian" id="vegetarian_no" value="0" {{ !$dish->vegetarian ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="radio" name="vegetarian" id="vegetarian_no"
+                                            value="0" {{ !$dish->vegetarian ? 'checked' : '' }}>
                                         <label class="form-check-label" for="vegetarian_no">No</label>
                                     </div>
                                 </div>

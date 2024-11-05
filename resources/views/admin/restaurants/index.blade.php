@@ -92,62 +92,59 @@
         {{-- Struttura Cards --}}
         <div class="container py-5">
 
-            <div class="d-flex justify-content-between">
-                <h1 class="pb-3 text-center">Il Tuo/I Tuoi Ristorante/i</h1>
-
-                <div class="text-center">
-                    <a href="{{ route('admin.restaurants.create') }}" class="btn btn-primary btn-lg">
-                        <i class="bi bi-plus-square me-2"></i> Aggiungi nuovo ristorante
-                    </a>
-                </div>
-            </div>
+            <p class="title pb-3 text-center">Il Tuo Ristorante</p>
 
             <!-- da gestire il numero di ristoranti di un singolo proprietario e di conseguenza la scritta -->
             <div class="row p-3">
                 @foreach ($restaurants as $restaurant)
-                    <div class="col-12 col-sm-6 col-md-6 d-flex justify-content-center py-2">
-                        <div class="card shadow-sm d-flex justify-content-center align-items-center p-3"
-                            style="max-width: 500px;">
-                            <div class="row align-items-center g-0">
+                    <div class="col-12 d-flex justify-content-center py-2">
+                        <div class="card card_bg w-lg-75 shadow-sm p-3">
+                            <div class="row align-items-center g-0 px-lg-4">
                                 <div class="col-md-4">
                                     <div class="box_image">
                                         <img src="{{ asset('img/test-ristorante.jpg') }}" alt="copertina-ristorante">
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="card-body p-0 ps-4">
-                                        <h4 class="card-title">{{ $restaurant->name }}</h4>
+                                    <div class="card-body p-0 ps-md-5">
+                                        <div class="text-center">
+                                            <p class="card-title title mb-4">{{ $restaurant->name }}</p>
+                                        </div>
 
                                         <!-- mobile btns -->
                                         <div class="d-md-none float-end">
-                                            <button type="button" class="btn btn-sm btn-warning"><i
-                                                    class="bi bi-pencil-square"></i></button>
-                                            <button type="button" class="btn btn-sm btn-danger"><i
-                                                    class="bi bi-trash3"></i></button>
+                                            <a href="{{ route('admin.restaurants.show', ['restaurant' => $restaurant->id]) }}" 
+                                                class="btn btn-sm btn-primary">
+                                                <i class="bi bi-eye-fill"></i>
+                                            </a>
+                                            <a href="{{ route('admin.restaurants.edit', ['restaurant' => $restaurant->id]) }}" 
+                                                class="btn btn-sm btn-secondary">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
                                         </div>
 
                                         <!-- desktop btns -->
-                                        <div class="d-none d-md-block float-end pt-3">
-                                            <a href="{{ route('admin.restaurants.show', ['restaurant' => $restaurant->id]) }}"
-                                                class="btn btn-sm btn-primary ">
-                                                Show
-                                            </a>
-                                            <a href="{{ route('admin.restaurants.edit', ['restaurant' => $restaurant->id]) }}"
-                                                class="btn btn-sm btn-warning ">
-                                                Edit
-                                            </a>
+                                        <div class="d-none d-md-block pt-3">
+                                            <div class="d-flex justify-content-center">
+                                                <a href="{{ route('admin.restaurants.show', ['restaurant' => $restaurant->id]) }}"
+                                                    class="btn btn-md btn-primary me-5">
+                                                    Show
+                                                </a>
+                                                <a href="{{ route('admin.restaurants.edit', ['restaurant' => $restaurant->id]) }}"
+                                                    class="btn btn-md btn-secondary ">
+                                                    Edit
+                                                </a>
+                                            </div>
 
-                                            <form
+                                            {{-- <form
                                                 action="{{ route('admin.restaurants.destroy', ['restaurant' => $restaurant->id]) }}"
                                                 method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
 
                                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                            </form>
+                                            </form> --}}
                                         </div>
-
-                                        <p class="card-text"> {{ $restaurant->address }}{{ $restaurant->phone }} </p>
                                     </div>
                                 </div>
                             </div>

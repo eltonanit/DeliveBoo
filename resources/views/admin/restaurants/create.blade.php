@@ -20,9 +20,9 @@
                                         <input class="form-control form-control-lg @error('name') is-invalid @enderror"
                                             type="text" name="name" id="name" value="{{ old('name') }}"
                                             placeholder="Inserisci il nome del ristorante">
-                                        {{-- @error('name')
+                                        @error('name')
                                             <div class="text-danger"> {{ $message }} </div>
-                                        @enderror --}}
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -32,10 +32,11 @@
                                         <label class="form-label" for="address"><i
                                                 class="bi bi-calendar-address-fill me-2"></i> Indirizzo</label>
                                         <input class="form-control form-control-lg @error('address') is-invalid @enderror"
-                                            type="text" name="address" id="address" value="{{ old('address') }}">
-                                        {{-- @error('address')
+                                            type="text" name="address" id="address" value="{{ old('address') }}"
+                                            placeholder="Inserisci l'indirizzo del ristorante">
+                                        @error('address')
                                             <div class="text-danger"> {{ $message }} </div>
-                                        @enderror --}}
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -45,11 +46,10 @@
                                         <label class="form-label" for="phone"><i class="bi bi-image-fill me-2"></i>
                                             Telefono del Ristorante</label>
                                         <input class="form-control form-control-lg @error('phone') is-invalid @enderror"
-                                            type="tel" name="phone" id="phone"
-                                            placeholder="Inserisci il link dell'Telefono">
-                                        {{-- @error('phone')
+                                            type="tel" name="phone" id="phone" placeholder="Inserisci il numero di telefono">
+                                        @error('phone')
                                             <div class="text-danger"> {{ $message }} </div>
-                                        @enderror --}}
+                                        @enderror
                                     </div>
                                 </div>
 

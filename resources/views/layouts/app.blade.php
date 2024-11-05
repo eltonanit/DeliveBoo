@@ -55,24 +55,47 @@
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registrati') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                <a class="nav-link dropdown-toggle d-none d-md-block" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {{ Auth::user()->p_iva }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a>
-                                    <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profile') }}</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                <div class="d-md-none">
+                                    <a class="nav-link dropdown-item" href="{{ route('admin.restaurants.index') }}">{{ __('Dashboard') }}</a>
+                                    <a class="nav-link dropdown-item" href="{{ url('profile') }}">{{ __('Profilo') }}</a>
+                                    <a class="nav-link dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                </div>
+
+                                <div class="dropcenter">
+                                    {{-- <button type="button" class="btn btn-sm btn-light border"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </button> --}}
+                                    <ul class="dropdown-menu p-2">
+                                        <!-- Dropdown menu links -->
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('admin.restaurants.index') }}">{{ __('Dashboard') }}</a>
+                                        </li>
+                                        <li class="my-2">
+                                            <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profilo') }}</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
+                                        </li>
+                                    </ul>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf

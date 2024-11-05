@@ -1,11 +1,18 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container d-flex align-items-center justify-content-center min-vh-100">
-        <div class="text-center">
-            <h1 class="display-4 font-weight-bold mb-4">Benvenuti su DeliveBoo!</h1>
-            <p class="lead mb-5">Ordina i tuoi piatti preferiti dai migliori ristoranti della città, consegnati direttamente
-                a casa tua.</p>
-            <a href="{{ route('admin.restaurants.index') }}" class="btn btn-primary btn-lg">Scopri i Ristoranti</a>
+    <div class="container py-5 d-flex align-items-center min-vh-100">
+        <div class="row">
+            <div class="col-12 text-center d-flex flex-column align-items-center">
+                <h1 class="display-4 font-weight-bold fw-bold">Benvenuto su DeliveBoo!</h1>
+                <p class="my-5 w-75 fst-italic lh-lg">" Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                    ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+                    anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+                    anim id est laborum. "</p>
+                <a href="{{ route('admin.restaurants.index') }}"
+                    class="btn btn-outline-primary text-white border-white btn-lg shadow">Visualizza i tuoi ristoranti!</a>
+            </div>
         </div>
     </div>
 @endsection
