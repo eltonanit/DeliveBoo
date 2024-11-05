@@ -31,6 +31,8 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
 
     // Rotte per la gestione dei piatti
     Route::resource('restaurants.dishes', DishController::class)->except(['index']); // Escludiamo l'indice se non necessario
+
+    Route::resource('dishes', DishController::class);
 });
 
 // Includi le rotte di autenticazione

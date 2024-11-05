@@ -52,7 +52,7 @@ class DishController extends Controller
 
         $dish->save();
 
-        return redirect()->route('admin.restaurants.index')->with('success', 'Piatto creato con successo');
+        return redirect()->route('admin.restaurants.show', $restaurantId)->with('success', 'Piatto creato con successo');
     }
 
     /**
@@ -103,7 +103,8 @@ class DishController extends Controller
      */
     public function destroy(Dish $dish)
     {
+        $restaurantId = $dish->restaurant_id; // Ottieni l'ID del ristorante associato
         $dish->delete();
-        return redirect()->route('admin.restaurants.index')->with('success', 'Piatto eliminato con successo');
+        return redirect()->route('admin.restaurants.show', $restaurantId)->with('success', 'Piatto eliminato con successo');
     }
 }
