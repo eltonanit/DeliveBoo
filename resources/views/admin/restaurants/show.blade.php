@@ -37,10 +37,10 @@
                                             <td class="text-white">{{ $dish->price }} €</td>
                                             <td class="text-white">{{ $dish->vegetarian ? 'Sì' : 'No' }}</td>
                                             <td>
-                                                <a href="{{ route('admin.restaurants.dishes.edit', ['restaurant' => $restaurant->id, 'dish' => $dish->id]) }}" class="btn btn-sm btn-warning">Edit</a>
+                                                <a href="{{ route('admin.dishes.edit', ['dish' => $dish->id]) }}" class="btn btn-sm btn-warning">Edit</a>
                                             </td>
                                             <td>
-                                                <form action="{{ route('admin.restaurants.dishes.destroy', ['restaurant' => $restaurant->id, 'dish' => $dish->id]) }}" method="POST" class="d-inline">
+                                                <form action="{{ route('admin.dishes.destroy', ['dish' => $dish->id]) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger">Delete</button>

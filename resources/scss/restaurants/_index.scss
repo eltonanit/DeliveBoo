@@ -1,12 +1,31 @@
-.box_image {
-    width: 100%;
-    height: 100%;
+body {
 
-    img {
+    /* Gradient lineare da grigio chiaro a blu primario */
+    background: linear-gradient(180deg, #b8b8b8, var(--bs-primary));
+    min-height: 100vh; /* Assicura che copra l'intera altezza della finestra */
+    margin: 0;
+
+    .card_bg {
+        background: linear-gradient(0deg, #b8b8b8, var(--bs-primary));
+    }
+    
+    .title {
+        font-size: 50px;
+        letter-spacing: 3px;
+        font-weight: bold;
+    }
+    
+    .box_image {
         width: 100%;
-        border-radius: 5px;
+        height: 100%;
+    
+        img {
+            width: 100%;
+            border-radius: 5px;
+        }
     }
 }
+
 
 @media screen and (min-width: 992px) {
     .w-lg-75 {
