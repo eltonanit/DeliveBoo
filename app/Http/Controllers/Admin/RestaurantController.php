@@ -22,6 +22,7 @@ class RestaurantController extends Controller
         $restaurants = Restaurant::all();
         return view('admin.restaurants.index', compact('restaurants'));
     }
+    
 
 
     /**
@@ -43,29 +44,18 @@ class RestaurantController extends Controller
      */
     public function store(StoreRestaurantRequest $request)
     {
-        $form_data = $request->all();
-
+        $form_data = $request->validated();
         $form_data['slug'] = Restaurant::generateSlug($form_data['name']);
 
         $restaurant = new Restaurant();
-        $restaurant->name = $request->name;
-        $restaurant->slug = Str::slug($request->name);
-        $restaurant->address = $request->address;
-        $restaurant->phone = $request->phone;
-
         $restaurant->fill($form_data);
+        $restaurant->user_id = auth()->id(); // Aggiungi questa linea per associare l'utente autenticato
         $restaurant->save();
-
-        // $validated_data = $request->validated();
-
-        // $validated_data['slug'] = Restaurant::generateSlug($validated_data['name']);
-
-        // $restaurant = Restaurant::create($validated_data);
-
-
 
         return redirect()->route('admin.restaurants.index')->with('success', 'Ristorante creato con successo');
     }
+
+
 
 
 
@@ -107,14 +97,14 @@ class RestaurantController extends Controller
      */
     public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
-        $restaurant->name = $request->name;
-        $restaurant->slug = Str::slug($request->name);
-        $restaurant->address = $request->address;
-        $restaurant->phone = $request->phone;
-        $restaurant->save();
+        $form_data = $request->validated();
+        $form_data['slug'] = Str::slug($request->name);
+
+        $restaurant->update($form_data);
 
         return redirect()->route('admin.restaurants.index')->with('success', 'Ristorante aggiornato con successo');
     }
+
 
 
     /**

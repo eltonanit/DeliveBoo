@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
+use App\Models\Restaurant;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -30,22 +32,40 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // Validazione per l'utente e il ristorante
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'address' => ['required', 'string', 'max:120'], // Validazione per l'indirizzo
+            'p_iva' => ['required', 'string', 'size:11', 'unique:'.User::class], // Validazione per la partita IVA
+            'restaurant_name' => ['required', 'string', 'max:120'],
+            'phone' => ['required', 'string', 'max:120'],
         ]);
 
+        // Crea l'utente
         $user = User::create([
-            'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'address' => $request->address, // Passa l'indirizzo
+            'p_iva' => $request->p_iva, // Passa la partita IVA
         ]);
 
+        // Crea il ristorante associato all'utente
+        $restaurant = Restaurant::create([
+            'name' => $request->restaurant_name,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'user_id' => $user->id, // Associa il ristorante all'utente
+            'slug' => Str::slug($request->restaurant_name), // Genera il slug dal nome del ristorante
+        ]);
+
+        // Invia l'evento di registrazione
         event(new Registered($user));
 
+        // Effettua il login dell'utente
         Auth::login($user);
 
+        // Reindirizza alla home
         return redirect(RouteServiceProvider::HOME);
     }
 }
