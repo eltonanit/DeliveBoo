@@ -22,7 +22,7 @@ return new class extends Migration
     $table->decimal('price', 4, 2);
     $table->boolean('vegetarian');
     $table->boolean('visible');
-    $table->foreignId('restaurant_id')->constrained('restaurants')->onDelete('cascade');
+    $table->foreignId('restaurant_id')->constrained()->onDelete('cascade');
     $table->timestamps();
 });
 

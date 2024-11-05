@@ -11,11 +11,16 @@ class Restaurant extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'slug', 'address', 'user_id'];
+    protected $fillable = ['name', 'phone', 'slug', 'address', 'user_id'];
 
     public static function generateSlug($name)
     {
         return Str::slug($name, '-');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function dishes()

@@ -22,37 +22,38 @@ class DishController extends Controller
         return view('admin.dishes.index', compact('dishes'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
+     * @param  int $restaurantId
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($restaurantId)
     {
-        $restaurants = Restaurant::all();
-        return view('admin.dishes.create', compact('restaurants'));
+        $restaurant = Restaurant::findOrFail($restaurantId);
+        return view('admin.dishes.create', compact('restaurant'));
     }
-
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreDishRequest  $request
+     * @param  int $restaurantId
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDishRequest $request)
+    public function store(StoreDishRequest $request, $restaurantId)
     {
-        $form_data = $request->all();
-        $form_data['slug'] = Dish::generateSlug($form_data['name']);
+        $form_data = $request->validated(); // Usa dati validati
+        $form_data['slug'] = Str::slug($form_data['name']); // Genera lo slug
 
         $dish = new Dish();
-        $dish->fill($form_data);
+        $dish->fill($form_data); // Riempie i campi in una volta
+        $dish->restaurant_id = $restaurantId; // Associa il piatto al ristorante
+
         $dish->save();
 
-        return redirect()->route('admin.restaurants.index', $dish)->with('success', 'Piatto creato con successo');
+        return redirect()->route('admin.restaurants.index')->with('success', 'Piatto creato con successo');
     }
-
 
     /**
      * Display the specified resource.
@@ -64,7 +65,6 @@ class DishController extends Controller
     {
         return view('admin.dishes.show', compact('dish'));
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -78,7 +78,6 @@ class DishController extends Controller
         return view('admin.dishes.edit', compact('dish', 'restaurants'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
@@ -88,20 +87,13 @@ class DishController extends Controller
      */
     public function update(UpdateDishRequest $request, Dish $dish)
     {
-        $dish->name = $request->name;
-        $dish->slug = Str::slug($request->name);
-        $dish->course = $request->course;
-        $dish->description = $request->description;
-        $dish->price = $request->price;
-        $dish->vegetarian = $request->vegetarian;
-        $dish->visible = $request->visible;
-        $dish->restaurant_id = $request->restaurant_id;
+        $form_data = $request->validated(); // Usa dati validati
+        $form_data['slug'] = Str::slug($request->name); // Genera lo slug
 
-        $dish->save();
+        $dish->update($form_data); // Aggiorna in una volta
 
         return redirect()->route('admin.restaurants.index')->with('success', 'Piatto aggiornato con successo');
     }
-
 
     /**
      * Remove the specified resource from storage.
