@@ -1,0 +1,30 @@
+.btn-outline-primary:hover {
+    color: white;
+}
+
+.btn-outline-primary:hover i {
+    color: white;
+}
+
+#my_back_button {
+    transition: transform 0.3s ease; /* Anima lo spostamento fluido del pulsante */
+
+    &:hover {
+        transform: translateX(-8px); /* Sposta il pulsante verso sinistra di 8px */
+    }
+}
+
+#my_left_arrow {
+    margin-right: 2px;
+    transition: margin 0.3s ease; /* Anima la spaziatura dell'icona */
+}
+
+#my_back_button:hover #my_left_arrow {
+    margin-right: 8px; /* Aumenta la spaziatura dell'icona al passaggio del mouse */
+}
+
+@media screen and (min-width: 768px) {
+    .w-md-75 {
+        width: 75%;
+    }
+}

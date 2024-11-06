@@ -1,0 +1,34 @@
+.board-menu{
+    background-color: #212529;
+    border: 10px solid rgb(128, 66, 0);
+}
+
+hr{
+    color: white;
+}
+
+#my_new_dish:hover {
+    will-change: transform;
+    transform-origin: center;
+    transition: transform 0.4s ease;
+    &:hover {
+        transform: scale(1.15);
+    }
+}
+
+#my_back_button {
+    transition: transform 0.3s ease; /* Anima lo spostamento fluido del pulsante */
+
+    &:hover {
+        transform: translateX(-8px); /* Sposta il pulsante verso sinistra di 8px */
+    }
+}
+
+#my_left_arrow {
+    margin-right: 2px;
+    transition: margin 0.3s ease; /* Anima la spaziatura dell'icona */
+}
+
+#my_back_button:hover #my_left_arrow {
+    margin-right: 8px; /* Aumenta la spaziatura dell'icona al passaggio del mouse */
+}
