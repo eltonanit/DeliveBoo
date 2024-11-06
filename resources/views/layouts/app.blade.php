@@ -66,7 +66,7 @@
                                 </a>
 
                                 <div class="d-md-none">
-                                    <a class="nav-link dropdown-item" href="{{ route('admin.restaurants.index') }}">{{ __('Dashboard') }}</a>
+                                    <a class="nav-link dropdown-item" href="{{ route('admin.restaurants.index') }}">Il tuo ristorante</a>
                                     <a class="nav-link dropdown-item" href="{{ url('profile') }}">{{ __('Profilo') }}</a>
                                     <a class="nav-link dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
@@ -83,7 +83,7 @@
                                     <ul class="dropdown-menu p-2">
                                         <!-- Dropdown menu links -->
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('admin.restaurants.index') }}">{{ __('Dashboard') }}</a>
+                                            <a class="dropdown-item" href="{{ route('admin.restaurants.index') }}">Il tuo Ristorante</a>
                                         </li>
                                         <li class="my-2">
                                             <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profilo') }}</a>

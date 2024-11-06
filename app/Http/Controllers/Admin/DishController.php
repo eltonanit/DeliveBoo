@@ -74,8 +74,8 @@ class DishController extends Controller
      */
     public function edit(Dish $dish)
     {
-        $restaurants = Restaurant::all();
-        return view('admin.dishes.edit', compact('dish', 'restaurants'));
+        $restaurant = $dish->restaurant;
+        return view('admin.dishes.edit', compact('dish', 'restaurant'));
     }
 
     /**
@@ -92,7 +92,7 @@ class DishController extends Controller
 
         $dish->update($form_data); // Aggiorna in una volta
 
-        return redirect()->route('admin.restaurants.index')->with('success', 'Piatto aggiornato con successo');
+        return redirect()->route('admin.restaurants.show', $dish->restaurant_id)->with('success', 'Piatto aggiornato con successo');
     }
 
     /**

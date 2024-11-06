@@ -85,7 +85,10 @@ class RestaurantController extends Controller
         // Recupera solo i piatti associati al ristorante
         $dishes = $restaurant->dishes;
 
-        return view('admin.restaurants.show', compact('restaurant', 'dishes'));
+        //Recupera solo i tipi associati al ristorante
+        $types = $restaurant->types;
+
+        return view('admin.restaurants.show', compact('restaurant', 'dishes', 'types'));
     }
 
 

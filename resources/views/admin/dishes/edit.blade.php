@@ -1,12 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container p-3">
+    <div class="container py-5">
         <div class="row">
-            <div class="col-12">
-                <h1>Modifica Piatto</h1>
-            </div>
-            <div class="col-12">
+            <div class="col-12 d-flex justify-content-center">
                 {{-- @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul class="list-unstyled">
@@ -16,128 +13,128 @@
                         </ul>
                     </div>
                 @endif --}}
-                <form action="{{ route('admin.dishes.update', ['dish' => $dish->id]) }}" method="post"
-                    enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <div class="row">
-                        <div class="col-12 mb-3">
-                            <label class="label-form">Nome Piatto</label>
-                            <input type="text" name="name" id="" class="form-control form-control-sm"
-                                placeholder="Nome Piatto" value="{{ old('name', $dish->name) }}">
-                            {{-- @error('name')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror --}}
-                        </div>
-                        <div class="col-12 mb-3">
-                            <div class="mb-3">
-                                <label for="course" class="form-label">Portata</label>
-                                <select name="course" id="course" class="form-select" required>
-                                    <option value="Appetizer" {{ $dish->course === 'Appetizer' ? 'selected' : '' }}>
-                                        Antipasto</option>
-                                    <option value="First" {{ $dish->course === 'First' ? 'selected' : '' }}>Primo</option>
-                                    <option value="Second" {{ $dish->course === 'Second' ? 'selected' : '' }}>Secondo
-                                    </option>
-                                    <option value="Side" {{ $dish->course === 'Side' ? 'selected' : '' }}>Contorno
-                                    </option>
-                                    <option value="Dessert" {{ $dish->course === 'Dessert' ? 'selected' : '' }}>Dessert
-                                    </option>
-                                </select>
+                <div class="card w-md-75 border-primary">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between">
+                        <p class="m-0">Modifica Piatto</p>
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger">{{ $error }}</div>
+                        @endforeach
+                        <a href="{{ route('admin.restaurants.show', $restaurant->id) }}"
+                            class="text-white link-underline link-underline-opacity-0">
+                            <div id="my_back_button" class="d-flex align-items-center">
+                                <i id="my_left_arrow" class="bi bi-arrow-left"></i>
+                                <p class="m-0">Indietro</p>
                             </div>
-                            {{-- @error('name')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror --}}
-                        </div>
-
-                        <div class="col-12 mb-3">
-                            <label class="label-form">Descrizione</label>
-                            <textarea name="description" id="" class="form-control form-control-sm" placeholder="Descrizione">{{ old('description', $dish->description) }}</textarea>
-                            {{-- @error('description')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror --}}
-                        </div>
-
-                        <div class="col-12 mb-3">
-                            <label class="label-form">Prezzo</label>
-                            <input type="text" name="price" id="" class="form-control form-control-sm"
-                                placeholder="Nome Piatto" value="{{ old('price', $dish->price) }}">
-                            {{-- @error('name')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror --}}
-                        </div>
-
-                        <!-- Id ristorante (momentaneo) -->
-                        <div class="col-md-6">
-                            <div class="mb-4">
-                                <input
-                                    class="form-control form-control-lg @error('restaurant_id') is-invalid @enderror"
-                                    type="hidden" name="restaurant_id" id="restaurant_id"
-                                    value="{{ old('restaurant_id', $dish->restaurant_id) }}" placeholder="Inserisci il prezzo">
-                                {{-- @error('restaurant_id')
-                                        <div class="text-danger"> {{ $message }} </div>
-                                    @enderror --}}
-                            </div>
-                        </div>
-
-                        <div class="col-12 mb-3">
-                            <div class="mb-3">
-                                <label class="form-label">Visibile</label>
-                                <div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="visible" id="visible_yes"
-                                            value="1" {{ $dish->visible ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="visible_yes">Sì</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="visible" id="visible_no"
-                                            value="0" {{ !$dish->visible ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="visible_no">No</label>
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- @error('name')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror --}}
-                        </div>
-
-                        <div class="col-12 mb-3">
-                            <div class="mb-3">
-                                <label class="form-label">Vegetariano</label>
-                                <div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="vegetarian" id="vegetarian_yes"
-                                            value="1" {{ $dish->vegetarian ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="vegetarian_yes">Sì</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="vegetarian" id="vegetarian_no"
-                                            value="0" {{ !$dish->vegetarian ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="vegetarian_no">No</label>
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- @error('name')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror --}}
-                        </div>
-                        {{-- <div class="col-12 mt-3 mb-3">
-                            @if ($dish->image != null)
-                                <img class="dish-image" src="{{ asset('./storage/' . $dish->image) }}"
-                                    alt="{{ $dish->name }}">
-                            @else
-                                <img class="dish-image" src="{{ asset('img/test-Piatto.jpg') }}" alt="{{ $dish->name }}">
-                            @endif
-                        </div>
-                        <div class="col-12 mt-3 mb-3">
-                            <label for="" class="control-label">Immagine Piatto</label>
-                            <input type="file" name="image" id="image" class="form-control form-control-sm">
-                        </div> --}}
-                        <div class="col-12 mt-3 text-center">
-                            <button type="submit" class="btn btn-success">Salva</button>
-                        </div>
+                        </a>
                     </div>
+                    <div class="card-body">
+                        <form action="{{ route('admin.dishes.update', $dish->id) }}" method="post"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="row">
+                                <!-- Nome Piatto -->
+                                <div class="col-12 mb-3 col-md-6">
+                                    <label class="form-label" for="name"><i class="bi bi-pencil-fill me-2"></i>Nome Piatto</label>
+                                    <input class="form-control form-control-md @error('name') is-invalid @enderror"
+                                        type="text" name="name" id="name" value="{{ old('name', $dish->name) }}"
+                                        placeholder="Inserisci il nome del piatto">
+                                    @error('name')
+                                        <div class="text-danger"> {{ $message }} </div>
+                                    @enderror
+                                </div>
 
-                </form>
+                                <!-- Portata -->
+                                <div class="col-12 mb-3 col-md-6">
+                                    <label class="form-label" for="course"><i class="bi bi-card-list me-2"></i>Portata</label>
+                                    <select name="course" id="course"
+                                        class="form-select @error('course') is-invalid @enderror">
+                                        <option value="" disabled {{ old('course', $dish->course) ? '' : 'selected' }}>Seleziona la portata</option>
+                                        <option value="Appetizer">Antipasto</option>
+                                        <option value="First">Primo</option>
+                                        <option value="Second">Secondo</option>
+                                        <option value="Side">Contorno</option>
+                                        <option value="Dessert">Dessert</option>
+                                    </select>
+                                    @error('course')
+                                        <div class="text-danger"> {{ $message }} </div>
+                                    @enderror
+                                </div>
+
+                                <!-- Prezzo -->
+                                <div class="col-12 mb-3 col-md-6">
+                                    <label class="form-label" for="price"><i class="bi bi-currency-euro me-2"></i>Prezzo</label>
+                                    <input class="form-control form-control-md @error('price') is-invalid @enderror"
+                                        type="text" name="price" id="price" value="{{ old('price', $dish->price) }}"
+                                        placeholder="Inserisci il prezzo">
+                                    @error('price')
+                                        <div class="text-danger"> {{ $message }} </div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-12 mb-3 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 d-sm-flex justify-content-end">
+                                            <!-- Visibile -->
+                                            <div>
+                                                <label class="form-label"><i class="bi bi-eye me-2"></i> Visibile</label>
+                                                <div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="visible" id="visible_yes" value="1" {{ old('visible', $dish->visible) ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="visible_yes">Sì</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="visible" id="visible_no" value="0" {{ old('visible', $dish->visible) ? '' : 'checked' }}>
+                                                        <label class="form-check-label" for="visible_no">No</label>
+                                                    </div>
+                                                </div>
+                                                @error('visible')
+                                                    <div class="text-danger"> {{ $message }} </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <!-- Vegetariano -->
+                                            <div>
+                                                <label class="form-label"><i class="bi bi-leaf me-2"></i> Vegetariano</label>
+                                                <div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="vegetarian" id="vegetarian_yes" value="1" {{ old('visible', $dish->vegetarian) ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="vegetarian_yes">Sì</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="vegetarian" id="vegetarian_no" value="0" {{ old('visible', $dish->vegetarian) ? '' : 'checked' }}>
+                                                        <label class="form-check-label" for="vegetarian_no">No</label>
+                                                    </div>
+                                                </div>
+                                                @error('vegetarian')
+                                                    <div class="text-danger"> {{ $message }} </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Descrizione -->
+                                <div class="col-12">
+                                    <label class="form-label" for="description"><i class="bi bi-chat-square-text me-2"></i> Descrizione</label>
+                                    <textarea name="description" id="description" rows="5"
+                                        class="form-control form-control-sm @error('description') is-invalid @enderror" placeholder="Descrizione">{{ old('description', $dish->description) }}</textarea>
+                                    @error('description')
+                                        <div class="text-danger"> {{ $message }} </div>
+                                    @enderror
+                                </div>
+
+                                <!-- Pulsante di Invio -->
+                                <div class="col-12 d-flex justify-content-center mt-4 mb-3">
+                                    <button type="submit" class="btn btn-outline-primary border-primary btn-lg shadow px-4">
+                                        <i class="bi bi-save me-2"></i> Salva
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

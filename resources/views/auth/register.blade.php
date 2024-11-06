@@ -78,13 +78,24 @@
                             </div>
 
                             <div class="col-12">
-                                <div class="row">
+                                {{-- <div class="row">
                                     <label for="type" class="d-block mb-3">Tipologia Ristorante</label>
-                                    @for ($i = 0; $i < 11; $i++)
+                                    @foreach ($types as $type)
                                         <div class="col-4 col-md-3 col-lg-2 pe-0 mb-3">
                                             <input type="checkbox" name="type" id="type"> Tipologia
                                         </div>
-                                    @endfor
+                                    @endforeach
+                                </div> --}}
+                                <div class="row">
+                                    <label for="type" class="d-block mb-3">Tipologia Ristorante</label>
+                                    @foreach($types as $type)
+                                        <div class="col-4 col-md-3 col-lg-2">
+                                            <label>
+                                                <input type="checkbox" name="type_ids[]" value="{{ $type->id }}">
+                                                {{ $type->name }}
+                                            </label><br>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
 
