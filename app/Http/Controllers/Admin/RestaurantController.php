@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Restaurant;
 use App\Models\Dish;
+use App\Models\Type;
 use App\Http\Requests\StoreRestaurantRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 
 class RestaurantController extends Controller
@@ -22,7 +24,20 @@ class RestaurantController extends Controller
         $restaurants = Restaurant::where('user_id', auth()->id())->get();
         return view('admin.restaurants.index', compact('restaurants'));
     }
-    
+
+
+    public function filterByTypes(Request $request)
+    {
+        $typeIds = $request->input('type_ids');
+        $types = Type::all(); // Per la select dei tipi
+
+        $restaurants = Restaurant::whereHas('types', function ($query) use ($typeIds) {
+            $query->whereIn('types.id', $typeIds);
+        })->get();
+
+        return view('restaurants.index', compact('restaurants', 'types'));
+    }
+
 
 
     /**
@@ -70,7 +85,10 @@ class RestaurantController extends Controller
         // Recupera solo i piatti associati al ristorante
         $dishes = $restaurant->dishes;
 
-        return view('admin.restaurants.show', compact('restaurant', 'dishes'));
+        //Recupera solo i tipi associati al ristorante
+        $types = $restaurant->types;
+
+        return view('admin.restaurants.show', compact('restaurant', 'dishes', 'types'));
     }
 
 

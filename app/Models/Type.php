@@ -6,20 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use illuminate\support\Str;
 
-class Dish extends Model
+class Type extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'slug', 'course', 'description', 'price', 'vegetarian', 'visible', 'restaurant_id'];
+    protected $fillable = ['name'];
 
     public static function generateSlug($name)
     {
         return Str::slug($name, '-');
     }
 
-
-    public function restaurant()
+    public function restaurants()
     {
-        return $this->belongsTo(Restaurant::class);
+        return $this->belongsToMany(Restaurant::class, 'types_restaurants');
     }
 }

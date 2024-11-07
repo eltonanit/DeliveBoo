@@ -35,6 +35,7 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::resource('dishes', DishController::class);
 });
 
+Route::get('/restaurants/filter', [RestaurantController::class, 'filterByTypes'])->name('restaurants.filter');
+
 // Includi le rotte di autenticazione
 require __DIR__ . '/auth.php';
-

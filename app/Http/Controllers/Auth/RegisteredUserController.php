@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Models\Type;
 
 class RegisteredUserController extends Controller
 {
@@ -22,7 +23,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $types = Type::all();
+        return view('auth.register', compact('types'));
     }
 
     /**
@@ -40,6 +42,8 @@ class RegisteredUserController extends Controller
             'p_iva' => ['required', 'string', 'size:11', 'unique:'.User::class], // Validazione per la partita IVA
             'restaurant_name' => ['required', 'string', 'max:120'],
             'phone' => ['required', 'string', 'max:120'],
+            'type_ids' => ['required', 'array'],
+            'type_ids.*' => ['exists:types,id']
         ]);
 
         // Crea l'utente
@@ -58,6 +62,8 @@ class RegisteredUserController extends Controller
             'user_id' => $user->id, // Associa il ristorante all'utente
             'slug' => Str::slug($request->restaurant_name), // Genera il slug dal nome del ristorante
         ]);
+
+        $restaurant->types()->sync($request->type_ids);
 
         // Invia l'evento di registrazione
         event(new Registered($user));
