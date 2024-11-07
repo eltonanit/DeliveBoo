@@ -12,12 +12,17 @@ class RestaurantController extends Controller
     {
         // Recupera il parametro di filtro dalla query (opzionale)
         $type = $request->query('type');
-        
-        // Se la tipologia è stata selezionata, filtra per quella
-        $restaurants = $type 
-            ? Restaurant::where('type', $type)->get() 
-            : Restaurant::all();
+
+        // Filtra per tipologia se selezionata, includendo le tipologie nella risposta
+        $restaurants = Restaurant::with('types')
+            ->when($type, function ($query, $type) {
+                $query->whereHas('types', function ($q) use ($type) {
+                    $q->where('name', $type);
+                });
+            })
+            ->get();
 
         return response()->json($restaurants);
     }
+
 }
