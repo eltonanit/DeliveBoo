@@ -108,7 +108,7 @@
 
                             <div class="text-center mt-4 mt-md-5">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('Conferma Registrazione') }}
                                 </button>
                             </div>
 
