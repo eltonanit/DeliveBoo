@@ -8,17 +8,12 @@ use App\Models\Dish;
 
 class DishController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Recupera i piatti con informazioni aggiuntive, ad esempio il ristorante associato
-        $dishes = Dish::with('restaurant')->get();
+        $restaurantId = $request->query('restaurant_id');
 
-        if ($dishes->isEmpty()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'No dishes found',
-            ]);
-        }
+        // Recupera i piatti con informazioni aggiuntive, ad esempio il ristorante associato
+        $dishes = Dish::where('restaurant_id', $restaurantId)->get();
 
         // Restituisce i dati come JSON per l'API
         return response()->json([
