@@ -59,7 +59,7 @@
 
                             <div class="col-12 col-md-4 mb-md-3">
                                 <label for="phone" class="col-form-label text-md-right">{{ __('Telefono *') }}</label>
-                                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required>
+                                <input id="phone" type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required>
                                 @error('phone')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -86,16 +86,21 @@
                                         </div>
                                     @endforeach
                                 </div> --}}
+                                <label for="type_ids" class="d-block mb-3">Tipologia Ristorante *</label>
                                 <div class="row">
-                                    <label for="type" class="d-block mb-3">Tipologia Ristorante *</label>
                                     @foreach($types as $type)
                                         <div class="col-4 col-md-3 col-lg-2">
                                             <label>
-                                                <input type="checkbox" name="type_ids[]" value="{{ $type->id }}">
+                                                <input id="type_ids" type="checkbox" name="type_ids[]" value="{{ $type->id }}" {{ in_array($type->id, old('type_ids', [])) ? 'checked' : '' }} required>
                                                 {{ $type->name }}
                                             </label><br>
                                         </div>
                                     @endforeach
+                                    @error('type_ids')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -103,7 +108,7 @@
 
                             <div class="text-center mt-4 mt-md-5">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('Conferma Registrazione') }}
                                 </button>
                             </div>
 

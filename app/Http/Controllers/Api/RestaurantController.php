@@ -22,7 +22,10 @@ class RestaurantController extends Controller
             })
             ->get();
 
-        return response()->json($restaurants);
+        return response()->json([
+            'success' => true,
+            'data' => $restaurants,
+        ]);
     }
 
 }
