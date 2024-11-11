@@ -13,7 +13,7 @@ class DishController extends Controller
         $restaurantId = $request->query('restaurant_id');
 
         // Recupera i piatti con informazioni aggiuntive, ad esempio il ristorante associato
-        $dishes = Dish::where('restaurant_id', $restaurantId)->get();
+        $dishes = Dish::with('restaurant.types')->where('restaurant_id', $restaurantId)->get();
 
         // Restituisce i dati come JSON per l'API
         return response()->json([
