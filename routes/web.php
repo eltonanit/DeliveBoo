@@ -22,19 +22,20 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Rotte protette per i ristoranti
+Route::middleware(['auth', 'check.owner'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('restaurants', RestaurantController::class);
+    Route::resource('restaurants.dishes', DishController::class)->except(['index']);
+});
+
 // Rotte per il pannello admin
 Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', [RestaurantController::class, 'index'])->name('dashboard'); // Dashboard Admin
-
-    // Rotte per la gestione dei ristoranti
-    Route::resource('restaurants', RestaurantController::class);
-
-    // Rotte per la gestione dei piatti
-    Route::resource('restaurants.dishes', DishController::class)->except(['index']); // Escludiamo l'indice se non necessario
-
-    Route::resource('dishes', DishController::class);
+    Route::resource('restaurants', RestaurantController::class);  // Ristoranti admin
+    Route::resource('dishes', DishController::class);  // Piatti admin
 });
 
+// Rotta per il filtro dei ristoranti
 Route::get('/restaurants/filter', [RestaurantController::class, 'filterByTypes'])->name('restaurants.filter');
 
 // Includi le rotte di autenticazione
