@@ -82,6 +82,12 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
+        // Verifica se il ristorante appartiene all'utente autenticato
+        if ($restaurant->user_id !== auth()->id()) {
+            // Se l'utente non è il proprietario, puoi reindirizzare o restituire un errore
+            abort(403, 'Accesso non autorizzato');
+        }
+
         // Recupera solo i piatti associati al ristorante
         $dishes = $restaurant->dishes;
 

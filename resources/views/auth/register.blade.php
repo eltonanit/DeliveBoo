@@ -78,20 +78,13 @@
                             </div>
 
                             <div class="col-12 mb-3">
-                                {{-- <div class="row">
-                                    <label for="type" class="d-block mb-3">Tipologia Ristorante</label>
-                                    @foreach ($types as $type)
-                                        <div class="col-4 col-md-3 col-lg-2 pe-0 mb-3">
-                                            <input type="checkbox" name="type" id="type"> Tipologia
-                                        </div>
-                                    @endforeach
-                                </div> --}}
                                 <label for="type_ids" class="d-block mb-3">Tipologia Ristorante *</label>
                                 <div class="row">
                                     @foreach($types as $type)
                                         <div class="col-4 col-md-3 col-lg-2">
                                             <label>
-                                                <input id="type_ids" type="checkbox" name="type_ids[]" value="{{ $type->id }}" {{ in_array($type->id, old('type_ids', [])) ? 'checked' : '' }} required>
+                                                <input type="checkbox" name="type_ids[]" value="{{ $type->id }}" 
+                                                    {{ in_array($type->id, old('type_ids', [])) ? 'checked' : '' }} class="type-checkbox">
                                                 {{ $type->name }}
                                             </label><br>
                                         </div>

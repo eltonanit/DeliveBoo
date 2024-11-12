@@ -23,7 +23,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        $types = Type::all();
+        $types = Type::orderBy('name', 'asc')->get();
         return view('auth.register', compact('types'));
     }
 
@@ -42,7 +42,7 @@ class RegisteredUserController extends Controller
             'p_iva' => ['required', 'string', 'size:11', 'unique:'.User::class], // Validazione per la partita IVA
             'restaurant_name' => ['required', 'string', 'max:120'],
             'phone' => ['required', 'string', 'max:120'],
-            'type_ids' => ['required', 'array'],
+            'type_ids' => ['required', 'array', 'min:1'],
             'type_ids.*' => ['exists:types,id']
         ]);
 
