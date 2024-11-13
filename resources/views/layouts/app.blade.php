@@ -62,7 +62,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle d-none d-md-block" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->p_iva }}
+                                    {{ Auth::user()->email }}
                                 </a>
 
                                 <div class="d-md-none">
