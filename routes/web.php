@@ -40,5 +40,7 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
 // Rotta per il filtro dei ristoranti
 Route::get('/restaurants/filter', [RestaurantController::class, 'filterByTypes'])->name('restaurants.filter');
 
+Route::post('/admin/restaurants/{restaurantId}/dishes/restore-all', [DishController::class, 'restoreAll'])->name('admin.dishes.restoreAll');
+
 // Includi le rotte di autenticazione
 require __DIR__ . '/auth.php';

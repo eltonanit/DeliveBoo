@@ -63,7 +63,13 @@ class DishController extends Controller
      */
     public function show(Dish $dish)
     {
-        return view('admin.dishes.show', compact('dish'));
+        // Recupera il ristorante
+        $restaurant = Restaurant::findOrFail($id);
+
+        // Recupera tutti i piatti, inclusi quelli eliminati (soft delete)
+        $dishes = $restaurant->dishes()->withTrashed()->get(); 
+
+        return view('admin.restaurants.show', compact('restaurant', 'dishes'));
     }
 
     /**
@@ -104,7 +110,30 @@ class DishController extends Controller
     public function destroy(Dish $dish)
     {
         $restaurantId = $dish->restaurant_id; // Ottieni l'ID del ristorante associato
-        $dish->delete();
+    
+        // Soft delete del piatto
+        $dish->delete(); // Esegui un soft delete
+        
+        // Redirect alla pagina del ristorante con un messaggio di successo
         return redirect()->route('admin.restaurants.show', $restaurantId)->with('success', 'Piatto eliminato con successo');
+    }
+
+    public function restoreAll($restaurantId)
+    {
+       // Recupera il ristorante e i piatti soft deleted
+        $restaurant = Restaurant::findOrFail($restaurantId);
+        $dishes = $restaurant->dishes()->onlyTrashed()->get();
+
+        if ($dishes->isEmpty()) {
+            // Se non ci sono piatti da ripristinare
+            return redirect()->route('admin.restaurants.show', $restaurantId)
+                            ->with('error', 'Nessun piatto da ripristinare.');
+        }
+
+        // Ripristina tutti i piatti eliminati
+        $restaurant->dishes()->onlyTrashed()->restore();
+
+        return redirect()->route('admin.restaurants.show', $restaurantId)
+                        ->with('success', 'Piatti ripristinati correttamente.');
     }
 }

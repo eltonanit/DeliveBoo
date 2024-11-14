@@ -67,7 +67,6 @@ class OrderController extends Controller
         $order->shipping_address = $request->input('shipping_address');
         $order->total_price = $request->input('amount');
         $order->total_items = $request->input('total_items');
-        $order->status = 'pending'; // Puoi iniziare con lo stato 'pending'
         $order->save();
 
         // Aggiungi i piatti all'ordine

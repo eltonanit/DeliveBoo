@@ -96,7 +96,25 @@
                                         @endforelse
                                     </tbody>
                                 </table>
-
+                                 <!-- Pulsante per ripristinare tutti i piatti soft deleted -->
+                                 <div class="row text-center mb-3">
+                                    <div class="col-12">
+                                        <form action="{{ route('admin.dishes.restoreAll', $restaurant->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-success">Ripristina tutti i piatti eliminati</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- Messaggi di successo o errore -->
+                                @if(session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @elseif(session('error'))
+                                    <div class="alert alert-danger">
+                                        {{ session('error') }}
+                                    </div>
+                                @endif
                                 <!-- Pulsante di ritorno -->
                                 <div class="col-12 d-flex justify-content-center mt-5">
                                     <a href="{{ route('admin.restaurants.index', $restaurant->id) }}"
