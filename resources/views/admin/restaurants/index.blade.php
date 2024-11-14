@@ -128,11 +128,11 @@
                                             <div class="d-flex justify-content-center">
                                                 <a href="{{ route('admin.restaurants.show', ['restaurant' => $restaurant->id]) }}"
                                                     class="btn btn-md btn-primary me-5">
-                                                    Show
+                                                    Info e Menu
                                                 </a>
                                                 <a href="{{ route('admin.restaurants.edit', ['restaurant' => $restaurant->id]) }}"
                                                     class="btn btn-md btn-secondary ">
-                                                    Edit
+                                                    Modifica
                                                 </a>
                                             </div>
 
