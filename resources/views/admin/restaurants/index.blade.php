@@ -134,10 +134,6 @@
                                                     class="btn btn-md btn-secondary ">
                                                     Edit
                                                 </a>
-                                                <a href="{{ route('admin.restaurants.orders', ['restaurant' => $restaurant->id]) }}"
-                                                    class="btn btn-md ms-5 btn-warning ">
-                                                    orders
-                                                </a>
                                             </div>
 
                                             {{-- <form
