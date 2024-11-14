@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderDish;
+use App\Models\Restaurant;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    
     public function createOrder(Request $request)
     {
+        
         $request->validate([
             'nonce' => 'required|string', 
             'amount' => 'required|numeric', 
@@ -20,6 +23,7 @@ class OrderController extends Controller
             'total_items' => 'required|integer',
         ]);
 
+     
         $order = new Order();
         $order->customer_name = $request->input('customer_name');
         $order->customer_surname = $request->input('customer_surname');
@@ -42,6 +46,7 @@ class OrderController extends Controller
         ]);
     }
 
+    // Metodo per ottenere gli ordini
     public function getOrders()
     {
         $orders = Order::with('orderDishes.dish')->get();
@@ -54,5 +59,21 @@ class OrderController extends Controller
             'totalOrders' => $totalOrders,
             'totalRevenue' => $totalRevenue,
         ]);
+    }
+
+    public function showOrders($restaurantId)
+    {
+        
+        $restaurant = Restaurant::findOrFail($restaurantId);
+    
+        
+        $orders = Order::whereHas('orderDishes.dish.restaurant', function($query) use ($restaurantId) {
+            $query->where('restaurant_id', $restaurantId);
+        })
+        ->with('orderDishes.dish')  
+        ->get();
+    
+       
+        return view('admin.orders.index', compact('restaurant', 'orders'));
     }
 }
