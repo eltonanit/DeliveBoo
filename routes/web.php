@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\RestaurantController;
 use App\Http\Controllers\Admin\DishController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 // Rotta principale
@@ -26,6 +27,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'check.owner'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('restaurants', RestaurantController::class);
     Route::resource('restaurants.dishes', DishController::class)->except(['index']);
+    Route::get('restaurants/{restaurant}/orders', [OrderController::class, 'showOrders'])->name('restaurants.orders');
 });
 
 // Rotte per il pannello admin
