@@ -47,6 +47,45 @@ class OrderController extends Controller
         ]);
     }
 
+    // Nuovo metodo saveOrder
+    public function saveOrder(Request $request)
+    {
+        // Valida la richiesta
+        $request->validate([
+            'customer_name' => 'required|string|max:120',
+            'customer_surname' => 'required|string|max:120',
+            'shipping_address' => 'required|string|max:120',
+            'amount' => 'required|numeric', 
+            'cart' => 'required|array', // Assicurati che la richiesta contenga i piatti
+            'total_items' => 'required|integer',
+        ]);
+
+        // Crea l'ordine
+        $order = new Order();
+        $order->customer_name = $request->input('customer_name');
+        $order->customer_surname = $request->input('customer_surname');
+        $order->shipping_address = $request->input('shipping_address');
+        $order->total_price = $request->input('amount');
+        $order->total_items = $request->input('total_items');
+        $order->status = 'pending'; // Puoi iniziare con lo stato 'pending'
+        $order->save();
+
+        // Aggiungi i piatti all'ordine
+        foreach ($request->input('cart') as $dish) {
+            OrderDish::create([
+                'order_id' => $order->id,
+                'dish_id' => $dish['id'],
+                'quantity' => $dish['quantity'], 
+            ]);
+        }
+
+        // Restituisci la risposta con l'ID dell'ordine
+        return response()->json([
+            'success' => true,
+            'orderId' => $order->id,
+        ], 201);
+    }
+
     // Metodo per ottenere gli ordini
     public function getOrders()
     {

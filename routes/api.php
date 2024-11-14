@@ -32,3 +32,4 @@ Route::post('/payment/submit', [PaymentController::class, 'processPayment']);
 
 Route::post('/orders', [OrderController::class, 'createOrder']);
 Route::get('/orders', [OrderController::class, 'getOrders']);
+Route::post('orders/save', [OrderController::class, 'saveOrder']);
