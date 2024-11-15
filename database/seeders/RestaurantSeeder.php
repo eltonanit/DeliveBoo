@@ -23,7 +23,7 @@ class RestaurantSeeder extends Seeder
             $new_restaurant->slug = Str::slug($restaurant['name'], '-');
             $new_restaurant->address = $restaurant['address'];
             $new_restaurant->phone = $restaurant['phone'];
-            // $new_restaurant->user_id = $restaurant['user_id'];
+            $new_restaurant->user_id = $restaurant['user_id'];
 
             $new_restaurant->save();
         }
