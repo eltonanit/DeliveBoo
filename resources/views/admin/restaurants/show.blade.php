@@ -9,7 +9,7 @@
                         <!-- Titolo -->
                         <div class="container">
                             <div class="row">
-                                <div class="d-flex justify-content-between">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
                                     <div class="d-flex flex-column">
                                         <h2 class="display-6 text-center text-white fw-bold">{{ $restaurant->name }}</h2>
                                         <p class="text-white fst-italic"> 
@@ -18,7 +18,17 @@
                                             @endforeach
                                         </p>
                                     </div>
-                                    <div class="text-white">
+                                    <!-- Messaggi di successo o errore -->
+                                    @if(session('success'))
+                                    <div class="alert alert-success">
+                                        <p class="m-0">{{ session('success') }}</p>
+                                    </div>
+                                    @elseif(session('error'))
+                                        <div class="alert alert-danger">
+                                            <p class="m-0">{{ session('error') }}</p>
+                                        </div>
+                                    @endif
+                                    <div class="text-white align-self-start">
                                         <div id="my_new_dish">
                                             <a href="{{ route('admin.restaurants.dishes.create', $restaurant->id) }}" 
                                                 class="text-white link-underline link-underline-opacity-0">
@@ -105,16 +115,6 @@
                                         </form>
                                     </div>
                                 </div>
-                                <!-- Messaggi di successo o errore -->
-                                @if(session('success'))
-                                    <div class="alert alert-success">
-                                        {{ session('success') }}
-                                    </div>
-                                @elseif(session('error'))
-                                    <div class="alert alert-danger">
-                                        {{ session('error') }}
-                                    </div>
-                                @endif
                                 <!-- Pulsante di ritorno -->
                                 <div class="col-12 d-flex justify-content-center mt-5">
                                     <a href="{{ route('admin.restaurants.index', $restaurant->id) }}"
