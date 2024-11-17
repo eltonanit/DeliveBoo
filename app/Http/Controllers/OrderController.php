@@ -34,10 +34,14 @@ class OrderController extends Controller
 
         // Aggiungi i piatti all'ordine
         foreach ($request->input('cart') as $dish) {
+            // Verifica la presenza della quantità, se non c'è imposta a 1
+            $quantity = isset($dish['quantity']) ? $dish['quantity'] : 1;
+        
+            // Inserisci il piatto nella tabella order_dishes
             OrderDish::create([
-                'order_id' => $order->id,
-                'dish_id' => $dish['id'], 
-                'quantity' => $dish['quantity'], 
+                'order_id' => $order->id,  // ID dell'ordine
+                'dish_id' => $dish['id'],  // ID del piatto
+                'quantity' => $quantity,   // Quantità
             ]);
         }
 
