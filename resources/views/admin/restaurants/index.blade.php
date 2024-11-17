@@ -121,11 +121,15 @@
                                                 class="btn btn-sm btn-secondary">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
+                                            <a href="{{ route('admin.restaurants.orders', ['restaurant' => $restaurant->id]) }}"
+                                                class="btn btn-sm btn-warning text-white">
+                                                <i class="bi bi-list-ul"></i>
+                                            </a>
                                         </div>
 
                                         <!-- desktop btns -->
                                         <div class="d-none d-md-block pt-3">
-                                            <div class="d-flex justify-content-center">
+                                            <div class="d-flex justify-content-evenly align-items-center">
                                                 <a href="{{ route('admin.restaurants.show', ['restaurant' => $restaurant->id]) }}"
                                                     class="btn btn-md btn-primary me-5">
                                                     Info e Menu
@@ -136,18 +140,9 @@
                                                 </a>
                                                 <a href="{{ route('admin.restaurants.orders', ['restaurant' => $restaurant->id]) }}"
                                                     class="btn btn-md ms-5 btn-warning ">
-                                                    orders
+                                                    Ordini
                                                 </a>
                                             </div>
-
-                                            {{-- <form
-                                                action="{{ route('admin.restaurants.destroy', ['restaurant' => $restaurant->id]) }}"
-                                                method="POST" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-
-                                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                            </form> --}}
                                         </div>
                                     </div>
                                 </div>

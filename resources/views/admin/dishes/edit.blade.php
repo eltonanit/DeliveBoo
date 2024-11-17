@@ -4,21 +4,10 @@
     <div class="container py-5">
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
-                {{-- @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul class="list-unstyled">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif --}}
+
                 <div class="card w-md-75 border-primary">
                     <div class="card-header bg-primary text-white d-flex justify-content-between">
                         <p class="m-0">Modifica Piatto</p>
-                        @foreach ($errors->all() as $error)
-                            <div class="alert alert-danger">{{ $error }}</div>
-                        @endforeach
                         <a href="{{ route('admin.restaurants.show', $restaurant->id) }}"
                             class="text-white link-underline link-underline-opacity-0">
                             <div id="my_back_button" class="d-flex align-items-center">
@@ -36,7 +25,7 @@
                                 <!-- Nome Piatto -->
                                 <div class="col-12 mb-3 col-md-6">
                                     <label class="form-label" for="name"><i class="bi bi-pencil-fill me-2"></i>Nome Piatto <span class="text-danger">*</span></label>
-                                    <input class="form-control form-control-md @error('name') is-invalid @enderror"
+                                    <input class="form-control form-control-md" @error('name') is-invalid @enderror
                                         type="text" name="name" id="name" value="{{ old('name', $dish->name) }}"
                                         placeholder="Inserisci il nome del piatto" required>
                                     @error('name')
