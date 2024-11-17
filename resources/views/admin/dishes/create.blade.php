@@ -114,7 +114,7 @@
                                         <div class="text-danger"> {{ $message }} </div>
                                     @enderror
                                 </div>
-
+                                <span class="text-secondary fst-italic"><span class="text-danger">*</span> = campi obbligatori</span>
                                 <!-- Pulsante di Invio -->
                                 <div class="col-12 d-flex justify-content-center mt-4 mb-3">
                                     <button type="submit" class="btn btn-outline-primary border-primary btn-lg shadow px-4">

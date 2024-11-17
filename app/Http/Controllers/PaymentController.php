@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Braintree\Gateway;
 use Illuminate\Http\Request;
 use Braintree\Transaction;
-use App\Http\Controllers\Controller; // Importazione della classe Controller
+use App\Http\Controllers\Controller;
 
 class PaymentController extends Controller
 {
@@ -31,10 +31,18 @@ class PaymentController extends Controller
     // Passo 2: Processare il pagamento
     public function processPayment(Request $request)
     {
-        $totalAmount = $request->amount; // L'importo del pagamento
-        $nonce = $request->nonce; // Il nonce del pagamento
+        // Validazione dei dati in ingresso
+        $request->validate([
+            'amount' => 'required|numeric|min:0.01',  // Importo richiesto, maggiore di 0
+            'nonce' => 'required|string',             // Il nonce del pagamento
+        ]);
 
-        // Effettua il pagamento
+        // L'importo del pagamento
+        $totalAmount = $request->amount;
+        // Il nonce generato dal frontend (viene passato nel corpo della richiesta)
+        $nonce = $request->nonce;
+
+        // Effettua la transazione di pagamento
         $result = $this->gateway->transaction()->sale([
             'amount' => $totalAmount,
             'paymentMethodNonce' => $nonce,
@@ -43,10 +51,18 @@ class PaymentController extends Controller
             ]
         ]);
 
+        // Se la transazione ha avuto successo
         if ($result->success) {
-            return response()->json(['success' => true, 'transactionId' => $result->transaction->id]);
+            return response()->json([
+                'success' => true,
+                'transactionId' => $result->transaction->id
+            ]);
         } else {
-            return response()->json(['success' => false, 'error' => $result->message]);
+            // Se la transazione fallisce, ritorna l'errore
+            return response()->json([
+                'success' => false,
+                'error' => $result->message
+            ]);
         }
     }
 
