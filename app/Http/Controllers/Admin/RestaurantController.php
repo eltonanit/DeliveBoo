@@ -108,7 +108,8 @@ class RestaurantController extends Controller
     public function edit(Restaurant $restaurant)
     {
         $dishes = Dish::all();
-        return view('admin.restaurants.edit', compact('restaurant', 'dishes'));
+        $types = Type::orderBy('name', 'asc')->get();
+        return view('admin.restaurants.edit', compact('restaurant', 'dishes', 'types'));
     }
 
 
@@ -125,6 +126,12 @@ class RestaurantController extends Controller
         $form_data['slug'] = Str::slug($request->name);
 
         $restaurant->update($form_data);
+
+        if ($request->has('type_ids')) {
+            $restaurant->types()->sync($request->type_ids);
+        } else {
+            $restaurant->types()->sync([]);
+        }
 
         return redirect()->route('admin.restaurants.index')->with('success', 'Ristorante aggiornato con successo');
     }
