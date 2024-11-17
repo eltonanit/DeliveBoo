@@ -44,21 +44,23 @@ class PaymentController extends Controller
         ]);
 
         if ($result->success) {
-            return response()->json(['success' => true, 'transactionId' => $result->transaction->id]);
+            // Ora che il pagamento è stato completato, crea l'ordine
+            $orderData = [
+                'amount' => $totalAmount,
+                'nonce' => $nonce,
+                'cart' => $request->cart,
+                'customer_name' => $request->customer_name,
+                'customer_surname' => $request->customer_surname,
+                'shipping_address' => $request->shipping_address,
+                'total_items' => $request->total_items,
+            ];
+
+            // Chiamata al metodo saveOrder per creare l'ordine
+            $orderController = new OrderController();
+            return $orderController->saveOrder(new Request($orderData)); // Passa i dati dell'ordine al controller Order
         } else {
             return response()->json(['success' => false, 'error' => $result->message]);
         }
     }
 
-    // Pagamento completato
-    public function success()
-    {
-        return view('payment.success');
-    }
-
-    // Errore nel pagamento
-    public function error()
-    {
-        return view('payment.error');
-    }
 }
