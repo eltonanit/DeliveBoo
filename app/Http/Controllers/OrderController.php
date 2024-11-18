@@ -106,18 +106,49 @@ class OrderController extends Controller
 
     // Metodo per visualizzare gli ordini di un ristorante
     public function showOrders($restaurantId)
-    {
-        // Assicurati che il ristoratore abbia accesso agli ordini di questo ristorante
-        $restaurant = Restaurant::findOrFail($restaurantId);
+{
+    // Assicurati che il ristoratore abbia accesso agli ordini di questo ristorante
+    $restaurant = Restaurant::findOrFail($restaurantId);
     
-        // Ottieni gli ordini relativi ai piatti di questo ristorante
-        $orders = Order::whereHas('orderDishes.dish.restaurant', function($query) use ($restaurantId) {
-            $query->where('restaurant_id', $restaurantId);
-        })
-        ->with('orderDishes.dish')  // Include i piatti associati agli ordini
-        ->get();
+    // Ottieni gli ordini relativi ai piatti di questo ristorante
+    $orders = Order::whereHas('orderDishes.dish.restaurant', function($query) use ($restaurantId) {
+        $query->where('restaurant_id', $restaurantId);
+    })
+    ->with('orderDishes.dish')  // Include i piatti associati agli ordini
+    ->get();
+
+    // Raggruppa gli ordini per data (senza orario)
+    $ordersGroupedByDate = $orders->groupBy(function($date) {
+        return \Carbon\Carbon::parse($date->created_at)->format('M Y'); // Solo la data, senza orario
+    });
+
+    // Calcola il totale per ogni data (somma dei 'total_price' per ogni gruppo)
+    $totalsByDate = $ordersGroupedByDate->map(function($group) {
+        return $group->sum('total_price'); // Somma totale per ogni data
+    });
+
+    // Calcola il numero di ordini per ogni data
+    $ordersCountByDate = $ordersGroupedByDate->map(function($group) {
+        return $group->count(); // Numero di ordini per ogni data
+    });
+
+    // Calcola la distribuzione degli ordini per piatto (per quantità)
+    $dishesCount = $orders->flatMap(function($order) {
+        return $order->orderDishes; // Estrai tutti i piatti da ogni ordine
+    })->groupBy('dish.name')->map(function($group) {
+        return $group->count(); // Conta la quantità di ogni piatto ordinato
+    });
+
+    // Calcola la distribuzione degli ordini per piatto (per prezzo)
+    $dishesTotalPrice = $orders->flatMap(function($order) {
+        return $order->orderDishes; // Estrai tutti i piatti da ogni ordine
+    })->groupBy('dish.name')->map(function($group) {
+        return $group->sum('total_price'); // Somma il totale degli ordini per piatto
+    });
+
+    // Restituisci la vista con gli ordini e le statistiche
+    return view('admin.orders.index', compact('restaurant', 'orders', 'ordersGroupedByDate', 'totalsByDate', 'ordersCountByDate', 'dishesCount', 'dishesTotalPrice'));
+}
+
     
-        // Restituisci la vista con gli ordini
-        return view('admin.orders.index', compact('restaurant', 'orders'));
-    }
 }
