@@ -9,8 +9,13 @@
                     Il nostro pannello di controllo intuitivo ti offre tutti gli strumenti necessari per monitorare le vendite in tempo reale, 
                     gestire il menu e ottimizzare le consegne. Unisciti agli oltre 1000 ristoratori che hanno già scelto DeliveBoo per 
                     espandere la loro presenza digitale. "</p>
+                <a href="{{ route('register') }}"
+                    class="btn btn-outline-primary text-white border-white btn-lg shadow">Registra il tuo ristorante!
+                </a>
+                <span class="text-white my-3">oppure</span>
                 <a href="{{ route('admin.restaurants.index') }}"
-                    class="btn btn-outline-primary text-white border-white btn-lg shadow">Visualizza i tuoi ristoranti!</a>
+                    class="btn btn-outline-primary text-white border-white btn-lg shadow">Visualizza il tuo ristorante!
+                </a>
             </div>
         </div>
     </div>
