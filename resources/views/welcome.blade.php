@@ -4,12 +4,11 @@
         <div class="row">
             <div class="col-12 text-center d-flex flex-column align-items-center">
                 <h1 class="display-4 font-weight-bold fw-bold">Benvenuto su DeliveBoo!</h1>
-                <p class="my-5 w-75 fst-italic lh-lg">" Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                    ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                    anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                    anim id est laborum. "</p>
+                <p class="my-5 w-75 fst-italic lh-lg">" Gestisci il tuo ristorante e fai crescere il tuo business con DeliveBoo, 
+                    la piattaforma che ti permette di raggiungere nuovi clienti e semplificare la gestione dei tuoi ordini. 
+                    Il nostro pannello di controllo intuitivo ti offre tutti gli strumenti necessari per monitorare le vendite in tempo reale, 
+                    gestire il menu e ottimizzare le consegne. Unisciti agli oltre 1000 ristoratori che hanno già scelto DeliveBoo per 
+                    espandere la loro presenza digitale. "</p>
                 <a href="{{ route('admin.restaurants.index') }}"
                     class="btn btn-outline-primary text-white border-white btn-lg shadow">Visualizza i tuoi ristoranti!</a>
             </div>

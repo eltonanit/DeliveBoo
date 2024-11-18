@@ -6,29 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('restaurants', function (Blueprint $table) {
             $table->id();
             $table->string('name', 120);
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('address', 120);
             $table->string('phone', 120);
-            $table->foreignId('user_id')->constrained()->nullable()->default(0)->onDelete('cascade');
+            $table->string('image')->nullable(); // Aggiunto il campo image
+            $table->unsignedBigInteger('user_id'); // Solo una volta!
             $table->timestamps();
+
+            // Aggiungi la foreign key
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('restaurants');
