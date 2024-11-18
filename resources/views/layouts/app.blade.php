@@ -10,8 +10,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <link rel="shortcut icon" href="https://impactwebagency.com/wp-content/uploads/2022/05/banner-deliveboo.png"
-        type="image/x-icon">
+    <link rel="icon" href="{{ asset('img/management.png') }}" sizes="32x32" type="image/png">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
