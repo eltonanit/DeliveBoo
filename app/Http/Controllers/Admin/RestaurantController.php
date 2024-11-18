@@ -62,6 +62,11 @@ class RestaurantController extends Controller
         $form_data = $request->validated();
         $form_data['slug'] = Restaurant::generateSlug($form_data['name']);
 
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('restaurants', 'public');
+            $validatedData['image'] = $imagePath;
+        }
+        
         $restaurant = new Restaurant();
         $restaurant->fill($form_data);
         $restaurant->user_id = auth()->id(); // Aggiungi questa linea per associare l'utente autenticato

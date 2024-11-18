@@ -11,7 +11,7 @@ class Restaurant extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'slug', 'address', 'phone', 'user_id'];
+    protected $fillable = ['name', 'slug', 'address', 'phone', 'image', 'user_id'];
 
     public static function generateSlug($name)
     {

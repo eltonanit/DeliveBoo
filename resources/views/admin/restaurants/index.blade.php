@@ -102,7 +102,8 @@
                             <div class="row align-items-center g-0 px-lg-4">
                                 <div class="col-md-4">
                                     <div class="box_image">
-                                        <img src="{{ asset('img/test-ristorante.jpg') }}" alt="copertina-ristorante">
+                                        <img src="{{ $restaurant->image ? asset('storage/' . $restaurant->image) : asset('img/test-ristorante.jpg') }}" 
+                                        alt="copertina-ristorante">
                                     </div>
                                 </div>
                                 <div class="col-md-8">

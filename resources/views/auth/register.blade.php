@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Registrazione') }}</div>
 
                 <div class="card-body pb-0">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-4 row">
@@ -78,13 +78,24 @@
                             </div>
 
                             <div class="col-12 mb-3">
+                                {{-- devo permettere all'utente di poter caricare un'immagine --}}
+                                <label for="formFile" class="form-label">Immagine Copertina</label>
+                                <input class="form-control" type="file" id="formFile">
+                                @error('image')
+                                <span class="invalid-feedback" role="alert">
+                                     <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="col-12 mb-3">
                                 <label for="type_ids" class="d-block mb-3">Tipologia Ristorante <span class="text-danger">*</span></label>
                                 <div class="row">
                                     @foreach($types as $type)
-                                        <div class="col-4 col-md-3 col-lg-2">
-                                            <label>
+                                        <div class="col-6 col-sm-4 col-md-4 col-lg-3">
+                                            <label class="mb-2 mb-md-3 cursor_pointer">
                                                 <input type="checkbox" name="type_ids[]" value="{{ $type->id }}" 
-                                                    {{ in_array($type->id, old('type_ids', [])) ? 'checked' : '' }} class="type-checkbox">
+                                                    {{ in_array($type->id, old('type_ids', [])) ? 'checked' : '' }} class="type-checkbox cursor_pointer">
                                                 {{ $type->name }}
                                             </label><br>
                                         </div>
