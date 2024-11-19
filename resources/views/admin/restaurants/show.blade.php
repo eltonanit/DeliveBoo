@@ -142,7 +142,7 @@
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
                                             <form action="{{ route('admin.dishes.restoreAll', $restaurant->id) }}" method="POST">
                                                 @csrf
-                                                <button type="submit" class="btn btn-success">Ripristina</button>
+                                                <button type="submit" class="btn btn-primary">Ripristina</button>
                                             </form>
                                         </div>
                                     </div>
@@ -152,7 +152,7 @@
                             <!-- Bottone per aprire la modale di ripristino -->
                             <div class="row text-center mb-3">
                                 <div class="col-12">
-                                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#restoreAllDishesModal">
+                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#restoreAllDishesModal">
                                         Ripristina tutti i piatti eliminati
                                     </button>
                                 </div>
