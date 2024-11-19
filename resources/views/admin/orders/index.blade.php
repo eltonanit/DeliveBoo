@@ -1,14 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-12 mt-4"><a href="{{ route('admin.restaurants.index') }}" class="btn btn-primary mb-3">Torna all'elenco ristoranti</a></div>
-        <div class="col-12"><h1>Ordini per il ristorante: <span class="text-danger"> {{ $restaurant->name }} </span></h1></div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <h3>Elenco Ordini</h3>
+<div class="container text-center py-5">
+    <div class="row justify-content-center">
+        <div class="col-12"><a href="{{ route('admin.restaurants.index') }}" class="btn btn-primary mb-3 float-start">Torna all'elenco ristoranti</a></div>
+        <div class="col-12 pb-4"><h1>Ordini per il ristorante: <span class="text-primary"> {{ $restaurant->name }} </span></h1></div>
+
+        <h3 class="pb-3">Elenco Ordini</h3>
+        <div class="col-12 col-md-8">
             <table class="table">
                 <thead>
                     <tr>
@@ -31,29 +30,34 @@
             </table>
         </div>
 
-        <div class="col-md-4 bg-white border border-black mb-5">
-            <h3 class="text-danger text-center mb-3">Statistiche Ordini</h3>
-            
-            <!-- Grafico 1: Numero Ordini per Data -->
-            <div class="mb-4">
-                <h5>- Numero Ordini per Data</h5>
-                <canvas id="orderCountChart"></canvas>
-                <hr style="border: 1px solid black; margin: 20px 0;">
+        <h3 class="text-danger text-center pt-4">Statistiche Ordini</h3>
+        <div class="col-12 d-md-flex align-items-center">
+            <div class="col-12 col-md-4 px-2">
+                <!-- Grafico 1: Numero Ordini per Data -->
+                <div class="mb-4 bg-white border border-black">
+                    <h5>- Numero Ordini per Data</h5>
+                    <canvas id="orderCountChart"></canvas>
+                    <hr style="border: 1px solid black; margin: 20px 0;">
+                </div>
             </div>
-        
-            <!-- Grafico 2: Totale Incassato per Data -->
-            <div class="mb-4">
-                <h5>- Totale Incassato per Data (€)</h5>
-                <canvas id="totalSalesChart"></canvas>
-                <hr style="border: 1px solid black; margin: 20px 0;">
+            <div class="col-12 col-md-4 px-2">
+                <!-- Grafico 2: Totale Incassato per Data -->
+                <div class="mb-4  bg-white border border-black">
+                    <h5>- Totale Incassato per Data (€)</h5>
+                    <canvas id="totalSalesChart"></canvas>
+                    <hr style="border: 1px solid black; margin: 20px 0;">
+                </div>
             </div>
-        
-            <!-- Grafico 3: Distribuzione degli Ordini per Piatto -->
-            <div class="mb-4">
-                <h5>- Distribuzione degli Ordini per Piatto (per Quantità)</h5>
-                <canvas id="dishesCountChart"></canvas>
+            <div class="col-12 col-md-4 px-2">
+                <!-- Grafico 3: Distribuzione degli Ordini per Piatto -->
+                <div class="mb-4  bg-white border border-black">
+                    <h5>- Distribuzione degli Ordini per Piatto (per Quantità)</h5>
+                    <canvas id="dishesCountChart"></canvas>
+                </div>
             </div>
+
         </div>
+        
     </div>
 </div>
 
